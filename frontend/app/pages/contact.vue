@@ -13,13 +13,15 @@ const config = useRuntimeConfig()
 const status = ref<'idle' | 'success' | 'error' | 'rateLimited'>('idle')
 const submitting = ref(false)
 
-const schema = toTypedSchema(
-  z.object({
-    name: z.string().min(2, t('contact.errors.name')),
-    email: z.string().email(t('contact.errors.email')),
-    message: z.string().min(10, t('contact.errors.message')),
-    website: z.string().optional(),
-  })
+const schema = computed(() =>
+  toTypedSchema(
+    z.object({
+      name: z.string().min(2, t('contact.errors.name')),
+      email: z.string().email(t('contact.errors.email')),
+      message: z.string().min(10, t('contact.errors.message')),
+      website: z.string().optional(),
+    })
+  )
 )
 
 const { handleSubmit, resetForm } = useForm({ validationSchema: schema })
@@ -32,7 +34,8 @@ const onSubmit = handleSubmit(async (values) => {
     status.value = 'success'
     resetForm()
   } catch (err) {
-    status.value = (err as { status?: number }).status === 429 ? 'rateLimited' : 'error'
+    const httpStatus = (err as { response?: { status?: number } }).response?.status
+    status.value = httpStatus === 429 ? 'rateLimited' : 'error'
   } finally {
     submitting.value = false
   }
