@@ -87,7 +87,7 @@ const onSubmit = handleSubmit(async (values) => {
         <FormItem>
           <FormLabel>{{ t('contact.message') }}</FormLabel>
           <FormControl>
-            <Textarea rows="6" v-bind="componentField" />
+            <Textarea rows="10" class="min-h-48" v-bind="componentField" />
           </FormControl>
           <FormMessage />
         </FormItem>
