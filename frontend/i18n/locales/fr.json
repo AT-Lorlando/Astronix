@@ -1,0 +1,48 @@
+{
+  "app": {
+    "name": "MobileApp",
+    "title": "Template Mobile",
+    "subtitle": "Nuxt • Capacitor • shadcn-vue"
+  },
+  "common": {
+    "home": "Accueil",
+    "loading": "Chargement...",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "fullName": "Nom complet"
+  },
+  "nav": {
+    "signIn": "Se connecter"
+  },
+  "home": {
+    "welcome": "Bienvenue",
+    "viewProfile": "Voir le profil",
+    "getStarted": "Commencer",
+    "getStartedSubtitle": "Créez un compte pour continuer",
+    "createAccount": "Créer un compte"
+  },
+  "login": {
+    "title": "Bon retour",
+    "subtitle": "Connectez-vous pour continuer",
+    "submit": "Se connecter",
+    "submitting": "Connexion...",
+    "noAccount": "Pas encore de compte ? Inscrivez-vous",
+    "error": "Échec de la connexion. Veuillez réessayer."
+  },
+  "signup": {
+    "title": "Créer un compte",
+    "subtitle": "Rejoignez-nous dès aujourd'hui",
+    "submit": "Créer un compte",
+    "submitting": "Création du compte...",
+    "hasAccount": "Vous avez déjà un compte ? Connectez-vous",
+    "error": "Échec de l'inscription. Veuillez réessayer."
+  },
+  "profile": {
+    "fallbackName": "Utilisateur",
+    "id": "ID",
+    "editProfile": "Modifier le profil",
+    "settings": "Paramètres",
+    "backToHome": "Retour à l'accueil",
+    "signOut": "Se déconnecter"
+  }
+}

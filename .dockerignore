@@ -1,0 +1,14 @@
+**/node_modules
+**/.output
+**/.nuxt
+**/.nitro
+**/build
+**/dist
+**/.git
+**/*.log
+**/.env
+**/.DS_Store
+.claude
+docs
+android
+ios
