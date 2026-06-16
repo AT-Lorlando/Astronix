@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { Button } from '~/components/ui/button'
 
-const { locale, setLocale } = useI18n()
-const localeCookie = useCookie('i18n_locale')
+const { t, locale, setLocale } = useI18n()
+const localeCookie = useCookie<'fr' | 'en' | null>('i18n_locale')
 
-const toggle = () => {
+const toggle = async () => {
   const next = locale.value === 'fr' ? 'en' : 'fr'
-  setLocale(next)
+  await setLocale(next)
   localeCookie.value = next
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (localeCookie.value && localeCookie.value !== locale.value) {
-    setLocale(localeCookie.value as 'fr' | 'en')
+    await setLocale(localeCookie.value)
   }
 })
 </script>
@@ -22,7 +22,7 @@ onMounted(() => {
     variant="ghost"
     size="sm"
     class="font-mono uppercase"
-    :aria-label="`Switch language, current ${locale}`"
+    :aria-label="t('nav.toggleLanguage', { locale })"
     @click="toggle"
   >
     {{ locale }}

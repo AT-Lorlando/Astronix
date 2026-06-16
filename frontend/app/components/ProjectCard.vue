@@ -4,17 +4,16 @@ import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
 import type { SiteProject } from '~/data/site'
 
-const props = defineProps<{ project: SiteProject }>()
+defineProps<{ project: SiteProject }>()
 const { t } = useI18n()
 
-const title = computed(() => props.project.id.charAt(0).toUpperCase() + props.project.id.slice(1))
 </script>
 
 <template>
   <Card :class="project.featured ? 'border-primary/50' : ''">
     <CardHeader>
       <div class="flex items-center gap-3">
-        <CardTitle>{{ title }}</CardTitle>
+        <CardTitle>{{ project.name }}</CardTitle>
         <Badge v-if="project.featured" class="font-mono text-xs">{{ t('projects.featured') }}</Badge>
       </div>
       <CardDescription>{{ t(`projects.${project.id}.tagline`) }}</CardDescription>
