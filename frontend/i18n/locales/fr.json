@@ -1,9 +1,5 @@
 {
-  "app": {
-    "name": "MobileApp",
-    "title": "Template Mobile",
-    "subtitle": "Nuxt • Capacitor • shadcn-vue"
-  },
+  "app": { "name": "[TON NOM]", "title": "[TON NOM]", "subtitle": "Ingénieur cyber & full-stack" },
   "common": {
     "home": "Accueil",
     "loading": "Chargement...",
@@ -11,9 +7,7 @@
     "password": "Mot de passe",
     "fullName": "Nom complet"
   },
-  "nav": {
-    "signIn": "Se connecter"
-  },
+  "nav": { "signIn": "Connexion", "about": "À propos", "projects": "Projets", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "home": {
     "welcome": "Bienvenue",
     "viewProfile": "Voir le profil",
@@ -44,5 +38,54 @@
     "settings": "Paramètres",
     "backToHome": "Retour à l'accueil",
     "signOut": "Se déconnecter"
-  }
+  },
+  "hero": {
+    "positioning": "Ingénieur cyber & full-stack — je conçois des produits IA locaux, souverains, sans cloud.",
+    "statusLine": "> yui · local · 0 cloud calls",
+    "ctaProjects": "Voir les projets",
+    "ctaContact": "Contact",
+    "ctaGithub": "GitHub"
+  },
+  "projects": {
+    "title": "Projets",
+    "back": "Retour aux projets",
+    "subtitle": "Des produits local-first, conçus de bout en bout.",
+    "viewDemo": "Voir la démo",
+    "viewGithub": "Voir sur GitHub",
+    "featured": "Projet phare",
+    "architecture": "Architecture",
+    "features": "Fonctionnalités",
+    "notFound": "Projet introuvable",
+    "yui": {
+      "tagline": "Assistant vocal IA 100% local",
+      "pitch": "Assistant vocal IA 100% local — pilote toute la maison, zéro cloud. Wakeword + Whisper + XTTS, agent LLM, architecture MCP modulaire.",
+      "architecture": "La détection de wakeword alimente Whisper (STT) ; un agent LLM planifie les actions via une couche d'outils MCP modulaire ; XTTS gère la synthèse vocale. Tout tourne en local.",
+      "features": ["Détection de wakeword + transcription Whisper", "Agent LLM local avec utilisation d'outils", "Architecture MCP modulaire pour piloter la maison", "Synthèse vocale XTTS — zéro appel cloud"]
+    },
+    "yoji": {
+      "tagline": "Todos local-first par-dessus Obsidian",
+      "pitch": "Todo + Obsidian, open-source, full local, synchro Git, sans serveur. Tes données restent à toi.",
+      "architecture": "[À COMPLÉTER — décris l'archi de Yoji]",
+      "features": ["Open-source et 100% local", "Synchro par Git, sans serveur", "S'appuie sur ton coffre Obsidian"]
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Un projet, une question ? Écris-moi.",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Envoyer",
+    "submitting": "Envoi...",
+    "success": "Merci — ton message a bien été envoyé.",
+    "error": "Une erreur est survenue. Réessaie.",
+    "rateLimited": "Trop de tentatives. Patiente un instant.",
+    "errors": {
+      "name": "Indique ton nom (2 caractères min).",
+      "email": "Indique un email valide.",
+      "message": "Indique un message (10 caractères min)."
+    }
+  },
+  "about": { "title": "À propos" },
+  "footer": { "tagline": "Local, souverain, sans cloud.", "email": "Email", "github": "GitHub" }
 }

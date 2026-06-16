@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia/nuxt',
     'shadcn-nuxt',
+    '@nuxt/content',
   ],
 
   app: {
@@ -43,8 +44,9 @@ export default defineNuxtConfig({
 
   // i18n: English by default, French available (https://i18n.nuxtjs.org)
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'fr',
     strategy: 'no_prefix',
+    detectBrowserLanguage: false,
     langDir: 'locales',
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },
