@@ -7,7 +7,7 @@
     "password": "Mot de passe",
     "fullName": "Nom complet"
   },
-  "nav": { "signIn": "Connexion", "projects": "Projets", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
+  "nav": { "signIn": "Connexion", "about": "À propos", "projects": "Projets", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "home": {
     "welcome": "Bienvenue",
     "viewProfile": "Voir le profil",
@@ -86,5 +86,6 @@
       "message": "Indique un message (10 caractères min)."
     }
   },
+  "about": { "title": "À propos" },
   "footer": { "tagline": "Local, souverain, sans cloud.", "email": "Email", "github": "GitHub" }
 }
