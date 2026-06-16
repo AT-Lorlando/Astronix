@@ -13,6 +13,9 @@ const { t } = useI18n()
 
     <nav class="flex items-center gap-1">
       <Button variant="ghost" size="sm" as-child>
+        <NuxtLink to="/about">{{ t('nav.about') }}</NuxtLink>
+      </Button>
+      <Button variant="ghost" size="sm" as-child>
         <NuxtLink to="/projects">{{ t('nav.projects') }}</NuxtLink>
       </Button>
       <Button variant="ghost" size="sm" as-child>
