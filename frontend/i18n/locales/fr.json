@@ -7,7 +7,7 @@
     "password": "Mot de passe",
     "fullName": "Nom complet"
   },
-  "nav": { "signIn": "Connexion", "projects": "Projets", "contact": "Contact", "github": "GitHub" },
+  "nav": { "signIn": "Connexion", "projects": "Projets", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "home": {
     "welcome": "Bienvenue",
     "viewProfile": "Voir le profil",

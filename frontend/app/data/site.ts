@@ -1,5 +1,6 @@
 export interface SiteProject {
   id: string
+  name: string
   featured: boolean
   repo: string
   video: string | null
@@ -18,8 +19,8 @@ export const site: SiteData = {
   email: '[TON EMAIL]',
   github: 'https://github.com/[USER]',
   projects: [
-    { id: 'yui', featured: true, repo: '[URL GITHUB YUI]', video: '/demo-yui.mp4', stack: ['Node/TS', 'Python', 'MCP', 'LLM local'] },
-    { id: 'yoji', featured: false, repo: '[URL GITHUB YOJI]', video: null, stack: ['[À COMPLÉTER]'] },
+    { id: 'yui', name: 'Yui', featured: true, repo: '[URL GITHUB YUI]', video: '/demo-yui.mp4', stack: ['Node/TS', 'Python', 'MCP', 'LLM local'] },
+    { id: 'yoji', name: 'Yoji', featured: false, repo: '[URL GITHUB YOJI]', video: null, stack: ['[À COMPLÉTER]'] },
   ],
 }
 

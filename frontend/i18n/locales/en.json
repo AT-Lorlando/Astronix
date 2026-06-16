@@ -7,7 +7,7 @@
     "password": "Password",
     "fullName": "Full Name"
   },
-  "nav": { "signIn": "Sign In", "projects": "Projects", "contact": "Contact", "github": "GitHub" },
+  "nav": { "signIn": "Sign In", "projects": "Projects", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
   "home": {
     "welcome": "Welcome",
     "viewProfile": "View Profile",
@@ -64,7 +64,7 @@
     "yoji": {
       "tagline": "Local-first todos on top of Obsidian",
       "pitch": "Todo + Obsidian, open-source, fully local, Git-synced, serverless. Your data stays yours.",
-      "architecture": "[À COMPLÉTER — décris l'archi de Yoji]",
+      "architecture": "[TO COMPLETE — describe Yoji's architecture]",
       "features": ["Open-source and fully local", "Git-based sync, no server", "Lives on top of your Obsidian vault"]
     }
   },
