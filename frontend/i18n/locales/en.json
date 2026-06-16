@@ -48,6 +48,7 @@
   },
   "projects": {
     "title": "Projects",
+    "back": "Back to projects",
     "subtitle": "Local-first products, built end to end.",
     "viewDemo": "View demo",
     "viewGithub": "View on GitHub",

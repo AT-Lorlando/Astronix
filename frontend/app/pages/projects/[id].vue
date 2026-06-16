@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { MessageFunction, VueMessageType } from 'vue-i18n'
 import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
 import { getProject } from '~/data/site'
@@ -9,17 +10,19 @@ const { t, tm, rt } = useI18n()
 const id = computed(() => String(route.params.id))
 const project = computed(() => getProject(id.value))
 
-if (!project.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Project not found' })
-}
+watchEffect(() => {
+  if (!project.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Project not found' })
+  }
+})
 
-const features = computed(() => tm(`projects.${id.value}.features`) as unknown[])
+const features = computed(() => tm(`projects.${id.value}.features`) as MessageFunction<VueMessageType>[])
 </script>
 
 <template>
   <article v-if="project" class="mx-auto max-w-3xl px-6 pt-16 pb-8">
     <NuxtLink to="/projects" class="mb-8 inline-flex items-center font-mono text-sm text-muted-foreground hover:text-primary">
-      <Icon name="lucide:arrow-left" class="mr-2 h-4 w-4" />{{ t('projects.title') }}
+      <Icon name="lucide:arrow-left" class="mr-2 h-4 w-4" />{{ t('projects.back') }}
     </NuxtLink>
 
     <h1 class="mb-2 text-4xl font-bold tracking-tight">{{ project.name }}</h1>
@@ -53,7 +56,7 @@ const features = computed(() => tm(`projects.${id.value}.features`) as unknown[]
       <ul class="space-y-2">
         <li v-for="(feature, i) in features" :key="i" class="flex items-start text-muted-foreground">
           <Icon name="lucide:check" class="mr-2 mt-1 h-4 w-4 shrink-0 text-primary" />
-          <span>{{ rt(feature as string) }}</span>
+          <span>{{ rt(feature) }}</span>
         </li>
       </ul>
     </section>
