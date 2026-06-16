@@ -11,6 +11,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
 const AuthController = () => import('#controllers/auth_controller')
+const ContactController = () => import('#controllers/contact_controller')
 
 router.get('/', async () => {
   return {
@@ -23,3 +24,6 @@ router.post('/signup', [AuthController, 'signup']).use(middleware.guest())
 router.post('/login', [AuthController, 'login']).use(middleware.guest())
 router.post('/logout', [AuthController, 'logout']).use(middleware.auth())
 router.get('/me', [AuthController, 'me']).use(middleware.auth())
+
+// Public contact form (no auth)
+router.post('/contact', [ContactController, 'store'])

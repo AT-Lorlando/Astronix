@@ -1,8 +1,9 @@
 <template>
   <div class="min-h-screen bg-background text-foreground">
-    <Navbar />
+    <AppHeader />
     <main>
       <slot />
     </main>
+    <AppFooter />
   </div>
 </template>
