@@ -7,8 +7,8 @@ const { t } = useI18n()
 <template>
   <footer class="flex h-16 shrink-0 items-center border-t px-6">
     <div class="mx-auto flex w-full max-w-5xl items-center justify-between gap-4">
-      <p class="font-mono text-xs text-muted-foreground">{{ t('footer.tagline') }}</p>
-      <div class="flex items-center gap-6 text-sm">
+      <p class="min-w-0 truncate font-mono text-xs text-muted-foreground">{{ t('footer.tagline') }}</p>
+      <div class="flex shrink-0 items-center gap-6 text-sm">
         <a
           :href="site.github"
           target="_blank"
