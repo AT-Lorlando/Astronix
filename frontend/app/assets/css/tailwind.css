@@ -123,8 +123,14 @@
   * {
     @apply border-border outline-ring/50;
   }
+  /* Base color on <html> (not <body>) so the fixed -z-10 SceneBackground canvas,
+     which lives inside <body>, paints above the base color and stays visible
+     behind the (transparent) page content. */
+  html {
+    @apply bg-background;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     @apply font-sans;
   }
 }
