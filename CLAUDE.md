@@ -56,11 +56,12 @@ Standard AdonisJS 6 ESM layout under `backend/app/` with subpath imports (`#cont
 - **Env**: validated in `start/env.ts` via `Env.schema` — any new env var (e.g. SMTP/mail config) must be added to that schema or the app won't boot. Copy `backend/.env.example` → `backend/.env` and set `APP_KEY` + `DB_*`.
 - **Controllers** return `response.ok({...})`; keep this JSON shape consistent with what the frontend expects.
 
-## Notes for upcoming portfolio work (per project brief)
+## Portfolio site (implemented)
 
-These are NOT yet in the repo and must be added before use:
+The repo is a personal portfolio built on this template. Design spec and plan live in `docs/superpowers/{specs,plans}/2026-06-16-portfolio-vitrine.*`.
 
-- **`@adonisjs/mail`** is not installed — needed for the contact endpoint. Install/configure it, add SMTP vars (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_TO`) to `start/env.ts`, and make the handler degrade gracefully (log + return success in dev) when creds are absent.
-- **`vee-validate` + `zod`** and shadcn-vue `form` components are not installed — needed for the contact form. Add the shadcn `form` component via the CLI and the deps via pnpm.
-- Centralize editable site content in a single data file plus the i18n locale JSONs (FR + EN), with clear placeholders.
-- Demo videos go in `frontend/public/` (e.g. `/demo-yui.mp4`) and are served as static assets.
+- **Pages** (`frontend/app/pages/`): `/` (Hero + project preview), `/projects` (list), `/projects/[id]` (dynamic demo page for `yui`/`yoji`, 404 on unknown id), `/contact` (form). Components: `AppHeader`, `LanguageToggle`, `AppFooter`, `HeroSection`, `ProjectCard`.
+- **Content split**: structural facts (handle, email, GitHub URLs, video paths, stack chips, project order) live in `frontend/app/data/site.ts`; all translatable prose lives in `frontend/i18n/locales/{fr,en}.json` keyed per project (`projects.<id>.{tagline,pitch,architecture,features}`). FR is the default locale; the header `LanguageToggle` switches FR/EN (persisted via the `i18n_locale` cookie; `detectBrowserLanguage` is disabled to keep FR deterministic).
+- **Theme**: single green accent set on `--primary`/`--ring` in the `.dark` block of `tailwind.css`; monospace (`--font-mono`, JetBrains Mono) for labels/metadata. Re-theme by editing the CSS variables, not the components.
+- **Contact endpoint**: `POST /contact` (`app/controllers/contact_controller.ts`) — VineJS validation (`app/validators/contact_validator.ts`), honeypot (`website` field), in-memory rate-limit (`app/services/rate_limiter.ts`, 3/min per IP). Sends via `@adonisjs/mail` (SMTP, `config/mail.ts`) using `app/mails/contact_notification.ts`; **degrades gracefully** (logs + returns `{ok:true}`) when `SMTP_HOST`/`MAIL_TO` are unset. Frontend form uses `vee-validate` + `zod`. SMTP vars (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_TO`) are optional in `start/env.ts`.
+- **Placeholders to fill before going live**: in `site.ts` — `handle` `[TON NOM]`, `email`, `github`/`repo` URLs, Yoji `stack`; in locales — `app.name`/`title`, `projects.yoji.architecture`; drop `frontend/public/demo-yui.mp4`; set `backend/.env` SMTP vars for real delivery.
