@@ -32,6 +32,11 @@ export class RateLimiter {
     this.#hits.set(key, recent)
     return true
   }
+
+  reset(key?: string) {
+    if (key) this.#hits.delete(key)
+    else this.#hits.clear()
+  }
 }
 
 // Shared singleton for the contact endpoint: 3 requests / minute per IP.

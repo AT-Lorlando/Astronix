@@ -17,7 +17,8 @@ export default class ContactNotification extends BaseMail {
   prepare() {
     this.message
       .to(this.mailTo)
-      .from(this.payload.email, this.payload.name)
+      .from(this.mailTo)
+      .replyTo(this.payload.email, this.payload.name)
       .subject(`[Portfolio] Nouveau message de ${this.payload.name}`)
       .text(
         `Nom: ${this.payload.name}\n` +

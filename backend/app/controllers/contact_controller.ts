@@ -8,7 +8,8 @@ import ContactNotification from '#mails/contact_notification'
 
 export default class ContactController {
   async store({ request, response }: HttpContext) {
-    if (!contactRateLimiter.allow(request.ip())) {
+    const ip = request.ip() ?? 'unknown'
+    if (!contactRateLimiter.allow(ip)) {
       return response.tooManyRequests({ ok: false, error: 'rate_limited' })
     }
 

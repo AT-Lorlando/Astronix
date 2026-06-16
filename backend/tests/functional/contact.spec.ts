@@ -1,4 +1,5 @@
 import { test } from '@japa/runner'
+import { contactRateLimiter } from '#services/rate_limiter'
 
 const valid = {
   name: 'Ada Lovelace',
@@ -6,7 +7,8 @@ const valid = {
   message: 'Bonjour, votre travail sur Yui est impressionnant.',
 }
 
-test.group('POST /contact', () => {
+test.group('POST /contact', (group) => {
+  group.each.setup(() => contactRateLimiter.reset())
   test('returns ok without SMTP creds (graceful dev mode)', async ({ client, assert }) => {
     const res = await client.post('/contact').json(valid)
     res.assertStatus(200)
