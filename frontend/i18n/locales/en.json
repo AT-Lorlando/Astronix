@@ -1,9 +1,5 @@
 {
-  "app": {
-    "name": "MobileApp",
-    "title": "Mobile Template",
-    "subtitle": "Nuxt • Capacitor • shadcn-vue"
-  },
+  "app": { "name": "[TON NOM]", "title": "[TON NOM]", "subtitle": "Cyber & full-stack engineer" },
   "common": {
     "home": "Home",
     "loading": "Loading...",
@@ -11,9 +7,7 @@
     "password": "Password",
     "fullName": "Full Name"
   },
-  "nav": {
-    "signIn": "Sign In"
-  },
+  "nav": { "signIn": "Sign In", "about": "About", "projects": "Projects", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
   "home": {
     "welcome": "Welcome",
     "viewProfile": "View Profile",
@@ -44,5 +38,54 @@
     "settings": "Settings",
     "backToHome": "Back to Home",
     "signOut": "Sign Out"
-  }
+  },
+  "hero": {
+    "positioning": "Cyber & full-stack engineer — I build local, sovereign AI products, with zero cloud.",
+    "statusLine": "> yui · local · 0 cloud calls",
+    "ctaProjects": "View projects",
+    "ctaContact": "Contact",
+    "ctaGithub": "GitHub"
+  },
+  "projects": {
+    "title": "Projects",
+    "back": "Back to projects",
+    "subtitle": "Local-first products, built end to end.",
+    "viewDemo": "View demo",
+    "viewGithub": "View on GitHub",
+    "featured": "Lead project",
+    "architecture": "Architecture",
+    "features": "Features",
+    "notFound": "Project not found",
+    "yui": {
+      "tagline": "100% local AI voice assistant",
+      "pitch": "100% local AI voice assistant — controls the whole house, zero cloud. Wakeword + Whisper + XTTS, LLM agent, modular MCP architecture.",
+      "architecture": "Wakeword detection feeds Whisper (STT); an LLM agent plans actions over a modular MCP tool layer; XTTS handles speech synthesis. Everything runs locally.",
+      "features": ["Wakeword detection + Whisper speech-to-text", "Local LLM agent with tool use", "Modular MCP architecture for home control", "XTTS voice synthesis — no cloud calls"]
+    },
+    "yoji": {
+      "tagline": "Local-first todos on top of Obsidian",
+      "pitch": "Todo + Obsidian, open-source, fully local, Git-synced, serverless. Your data stays yours.",
+      "architecture": "[TO COMPLETE — describe Yoji's architecture]",
+      "features": ["Open-source and fully local", "Git-based sync, no server", "Lives on top of your Obsidian vault"]
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "A project, a question? Drop me a line.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "success": "Thanks — your message has been sent.",
+    "error": "Something went wrong. Please try again.",
+    "rateLimited": "Too many attempts. Please wait a moment.",
+    "errors": {
+      "name": "Please enter your name (2+ characters).",
+      "email": "Please enter a valid email.",
+      "message": "Please enter a message (10+ characters)."
+    }
+  },
+  "about": { "title": "About" },
+  "footer": { "tagline": "Local, sovereign, no cloud.", "email": "Email", "github": "GitHub" }
 }
