@@ -1,0 +1,20 @@
+# Dependencies
+node_modules
+
+# Env files
+*.env
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist
+.output
+.nuxt
+build
+
+# Logs
+*.log
+
+# Misc
+.DS_Store
