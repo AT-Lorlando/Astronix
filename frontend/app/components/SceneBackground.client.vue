@@ -23,6 +23,7 @@ const onResize = () => {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
+  if (reducedMotion) renderFrame()
 }
 
 const onPointerMove = (e: PointerEvent) => {
