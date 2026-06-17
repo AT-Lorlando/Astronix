@@ -38,14 +38,11 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   /*
   |----------------------------------------------------------
-  | Variables for sending the contact-form email (optional).
-  | Leave unset in dev: the /contact endpoint logs the
-  | message and returns success instead of sending mail.
+  | Admin panel credentials (optional). Consumed by
+  | database/seeders/admin_seeder.ts (`node ace db:seed`) to
+  | create/update the admin account used to sign in at /admin.
   |----------------------------------------------------------
   */
-  SMTP_HOST: Env.schema.string.optional(),
-  SMTP_PORT: Env.schema.number.optional(),
-  SMTP_USER: Env.schema.string.optional(),
-  SMTP_PASS: Env.schema.string.optional(),
-  MAIL_TO: Env.schema.string.optional(),
+  ADMIN_EMAIL: Env.schema.string.optional(),
+  ADMIN_PASSWORD: Env.schema.string.optional(),
 })

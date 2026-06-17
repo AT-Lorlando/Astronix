@@ -30,11 +30,10 @@ const sessionConfig = defineConfig({
   },
 
   /**
-   * The store to use. Make sure to validate the environment
-   * variable in order to infer the store name without any
-   * errors.
+   * The store to use. Tests use the in-memory store so the Japa session
+   * client (`client.loginAs(user)`) and the app share the same session data.
    */
-  store: env.get('SESSION_DRIVER'),
+  store: app.inTest ? 'memory' : env.get('SESSION_DRIVER'),
 
   /**
    * List of configured stores. Refer documentation to see

@@ -28,7 +28,7 @@ pnpm format         # prettier both
 
 Backend tests (Japa) run from `backend/`: `pnpm --filter ./backend test`, or `cd backend && node ace test`. A single suite/file: `node ace test --files="tests/path/to/file.spec.ts"`. There is no frontend test runner configured.
 
-Adonis CLI is `node ace <cmd>` from `backend/` (e.g. `node ace make:controller`, `node ace migration:run`, `node ace make:mail`). Frontend mobile builds: `cd frontend && pnpm mobile:sync` (generate + `cap sync`), `pnpm mobile:ios`, `pnpm mobile:android`.
+Adonis CLI is `node ace <cmd>` from `backend/` (e.g. `node ace make:controller`, `node ace migration:run`, `node ace db:seed`). Frontend mobile builds: `cd frontend && pnpm mobile:sync` (generate + `cap sync`), `pnpm mobile:ios`, `pnpm mobile:android`.
 
 ## Frontend architecture
 
@@ -48,12 +48,12 @@ The full auth flow (Pinia `auth` store, `login`/`signup`/`profile` pages, `useAu
 
 ## Backend architecture
 
-Standard AdonisJS 6 ESM layout under `backend/app/` with subpath imports (`#controllers/*`, `#models/*`, `#validators/*`, `#mails/*`, `#services/*`, `#middleware/*`, … — see `package.json` `imports`; always import via these, not relative paths).
+Standard AdonisJS 6 ESM layout under `backend/app/` with subpath imports (`#controllers/*`, `#models/*`, `#validators/*`, `#services/*`, `#middleware/*`, … — see `package.json` `imports`; always import via these, not relative paths).
 
 - **Routes** in `start/routes.ts`; controllers lazy-imported (`() => import('#controllers/...')`) and referenced as `[Controller, 'method']`. Middleware applied per-route via `middleware.auth()` / `middleware.guest()` (named middleware registered in `start/kernel.ts`).
 - **Validation**: VineJS (`@vinejs/vine`) validators in `app/validators/`, consumed with `request.validateUsing(validator)`. Define a compiled validator per endpoint.
 - **Auth**: session/web guard (`auth.use('web')`), Lucid `User` model. CORS has `credentials: true, origin: true`.
-- **Env**: validated in `start/env.ts` via `Env.schema` — any new env var (e.g. SMTP/mail config) must be added to that schema or the app won't boot. Copy `backend/.env.example` → `backend/.env` and set `APP_KEY` + `DB_*`.
+- **Env**: validated in `start/env.ts` via `Env.schema` — any new env var (e.g. `ADMIN_EMAIL`/`ADMIN_PASSWORD`) must be added to that schema or the app won't boot. Copy `backend/.env.example` → `backend/.env` and set `APP_KEY` + `DB_*`.
 - **Controllers** return `response.ok({...})`; keep this JSON shape consistent with what the frontend expects.
 
 ## Portfolio site (implemented)
@@ -63,6 +63,7 @@ The repo is a personal portfolio built on this template. Design spec and plan li
 - **Pages** (`frontend/app/pages/`): `/` (Hero + project preview), `/projects` (list), `/projects/[id]` (dynamic demo page for `yui`/`yoji`, 404 on unknown id), `/contact` (form). Components: `AppHeader`, `LanguageToggle`, `AppFooter`, `HeroSection`, `ProjectCard`.
 - **Content split**: structural facts (handle, email, GitHub URLs, video paths, stack chips, project order) live in `frontend/app/data/site.ts`; all translatable prose lives in `frontend/i18n/locales/{fr,en}.json` keyed per project (`projects.<id>.{tagline,pitch,architecture,features}`). FR is the default locale; the header `LanguageToggle` switches FR/EN (persisted via the `i18n_locale` cookie; `detectBrowserLanguage` is disabled to keep FR deterministic).
 - **Theme**: single green accent set on `--primary`/`--ring` in the `.dark` block of `tailwind.css`; monospace (`--font-mono`, JetBrains Mono) for labels/metadata. Re-theme by editing the CSS variables, not the components.
-- **Contact endpoint**: `POST /contact` (`app/controllers/contact_controller.ts`) — VineJS validation (`app/validators/contact_validator.ts`), honeypot (`website` field), in-memory rate-limit (`app/services/rate_limiter.ts`, 3/min per IP). Sends via `@adonisjs/mail` (SMTP, `config/mail.ts`) using `app/mails/contact_notification.ts`; **degrades gracefully** (logs + returns `{ok:true}`) when `SMTP_HOST`/`MAIL_TO` are unset. Frontend form uses `vee-validate` + `zod`. SMTP vars (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_TO`) are optional in `start/env.ts`.
-- **Placeholders to fill before going live**: in `site.ts` — `handle` `[TON NOM]`, `email`, `github`/`repo` URLs, Yoji `stack`; in locales — `app.name`/`title`, `projects.yoji.architecture`; drop `frontend/public/demo-yui.mp4`; set `backend/.env` SMTP vars for real delivery.
+- **Contact endpoint**: `POST /contact` (`app/controllers/contact_controller.ts`) — VineJS validation (`app/validators/contact_validator.ts`), honeypot (`website` field), in-memory rate-limit (`app/services/rate_limiter.ts`, 3/min per IP). **Persists** each message to the `contact_messages` table (`app/models/contact_message.ts`) instead of emailing; returns `{ok:true}`. Frontend form uses `vee-validate` + `zod` and posts directly via `$fetch` (no auth). There is no SMTP/mail integration.
+- **Admin panel**: server-rendered Edge views (`@adonisjs/core/providers/edge_provider`, templates in `backend/resources/views/`) at `/admin`, protected by the session `web` guard. `AdminSessionController` (`app/controllers/admin/session_controller.ts`) handles login/logout against the `User` model; `AdminMessagesController` lists/show/mark-read/mark-unread/delete contact messages. The admin user is created by `database/seeders/admin_seeder.ts` from `ADMIN_EMAIL`/`ADMIN_PASSWORD` (`node ace db:seed`). The `forceJson` middleware is applied only to the JSON API route group (`start/routes.ts`), not to `/admin`, so Edge views render HTML and auth failures redirect to `/admin/login`.
+- **Placeholders to fill before going live**: `site.ts` and locales are filled (handle, email, GitHub URLs, Yoji stack, `app.name`/`title`); still to do — `projects.yoji.architecture` and `content/about/{fr,en}.md` (left as `[À COMPLÉTER]`); drop `frontend/public/demo-yui.mp4`; set `ADMIN_EMAIL`/`ADMIN_PASSWORD` in `backend/.env` and run `node ace db:seed` for the admin login.
 - **About page**: `/about` renders editable Markdown from `frontend/content/about/{fr,en}.md` via `@nuxt/content` v3 (collection in `frontend/content.config.ts`; page `app/pages/about.vue` loads the active-locale file with a fallback to the other locale). Markdown is styled with `@tailwindcss/typography` (`prose prose-invert`). **Web build only** (like the API proxy). `@nuxt/content` uses a native `better-sqlite3` connector — build it in the same image/runtime you deploy to (the Docker build compiles it in-image); it's listed in the root `pnpm.onlyBuiltDependencies`.

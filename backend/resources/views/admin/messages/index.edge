@@ -1,0 +1,43 @@
+@component('components/admin_layout', { title: 'Messages — Admin' })
+  <header class="bar">
+    <h1>
+      Messages
+      @if(unreadCount > 0)
+        <span class="badge">{{ unreadCount }} non lu{{ unreadCount > 1 ? 's' : '' }}</span>
+      @end
+    </h1>
+    <form method="POST" action="/admin/logout" class="inline">
+      <button type="submit" class="btn">Déconnexion</button>
+    </form>
+  </header>
+
+  @if(messages.length === 0)
+    <p class="muted">Aucun message pour l'instant.</p>
+  @else
+    <table>
+      <thead>
+        <tr>
+          <th>Reçu le</th>
+          <th>Nom</th>
+          <th>E-mail</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @each(message in messages)
+          <tr class="{{ message.readAt ? '' : 'unread' }}">
+            <td>{{ message.createdAt.toFormat('dd/MM/yyyy HH:mm') }}</td>
+            <td>
+              {{ message.name }}
+              @if(!message.readAt)
+                <span class="badge">nouveau</span>
+              @end
+            </td>
+            <td class="muted">{{ message.email }}</td>
+            <td><a href="/admin/messages/{{ message.id }}">Voir</a></td>
+          </tr>
+        @end
+      </tbody>
+    </table>
+  @end
+@end

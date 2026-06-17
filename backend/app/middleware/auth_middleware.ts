@@ -8,9 +8,10 @@ import type { Authenticators } from '@adonisjs/auth/types'
  */
 export default class AuthMiddleware {
   /**
-   * The URL to redirect to, when authentication fails
+   * The URL to redirect to when authentication fails. Only the server-rendered
+   * admin panel relies on this; API routes use `forceJson` and get a JSON 401.
    */
-  redirectTo = '/login'
+  redirectTo = '/admin/login'
 
   async handle(
     ctx: HttpContext,
