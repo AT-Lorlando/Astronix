@@ -15,12 +15,12 @@ export interface SiteData {
 }
 
 export const site: SiteData = {
-  handle: '[TON NOM]',
-  email: '[TON EMAIL]',
-  github: 'https://github.com/[USER]',
+  handle: 'Jérémy RICHARD',
+  email: 'jeremy.richard@astronix.fr',
+  github: 'https://github.com/AT-Lorlando',
   projects: [
-    { id: 'yui', name: 'Yui', featured: true, repo: '[URL GITHUB YUI]', video: '/demo-yui.mp4', stack: ['Node/TS', 'Python', 'MCP', 'LLM local'] },
-    { id: 'yoji', name: 'Yoji', featured: false, repo: '[URL GITHUB YOJI]', video: null, stack: ['[À COMPLÉTER]'] },
+    { id: 'yui', name: 'Yui', featured: true, repo: 'https://github.com/AT-Lorlando/yui', video: '/demo-yui.mp4', stack: ['Node/TS', 'Python', 'MCP', 'LLM local'] },
+    { id: 'yoji', name: 'Yoji', featured: false, repo: 'https://github.com/AT-Lorlando/yoji', video: null, stack: ['Nuxt', 'Adonis'] },
   ],
 }
 
