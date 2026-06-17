@@ -3,42 +3,9 @@
   "common": {
     "home": "Home",
     "loading": "Loading...",
-    "email": "Email",
-    "password": "Password",
-    "fullName": "Full Name"
+    "email": "Email"
   },
-  "nav": { "signIn": "Sign In", "about": "About", "projects": "Projects", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
-  "home": {
-    "welcome": "Welcome",
-    "viewProfile": "View Profile",
-    "getStarted": "Get Started",
-    "getStartedSubtitle": "Create an account to continue",
-    "createAccount": "Create Account"
-  },
-  "login": {
-    "title": "Welcome Back",
-    "subtitle": "Sign in to continue",
-    "submit": "Sign In",
-    "submitting": "Signing in...",
-    "noAccount": "Don't have an account? Sign up",
-    "error": "Login failed. Please try again."
-  },
-  "signup": {
-    "title": "Create Account",
-    "subtitle": "Join us today",
-    "submit": "Create Account",
-    "submitting": "Creating account...",
-    "hasAccount": "Already have an account? Sign in",
-    "error": "Signup failed. Please try again."
-  },
-  "profile": {
-    "fallbackName": "User",
-    "id": "ID",
-    "editProfile": "Edit Profile",
-    "settings": "Settings",
-    "backToHome": "Back to Home",
-    "signOut": "Sign Out"
-  },
+  "nav": { "about": "About", "projects": "Projects", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
   "hero": {
     "positioning": "Cyber & full-stack engineer — I build local, sovereign AI products, with zero cloud.",
     "statusLine": "> yui · local · 0 cloud calls",
