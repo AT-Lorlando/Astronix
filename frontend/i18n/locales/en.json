@@ -5,7 +5,7 @@
     "loading": "Loading...",
     "email": "Email"
   },
-  "nav": { "about": "About", "projects": "Projects", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
+  "nav": { "about": "About", "projects": "Projects", "cv": "CV", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
   "hero": {
     "positioning": "Cyber & full-stack engineer — I build local, sovereign AI products, with zero cloud.",
     "statusLine": "> yui · local · 0 cloud calls",
@@ -51,6 +51,73 @@
       "name": "Please enter your name (2+ characters).",
       "email": "Please enter a valid email.",
       "message": "Please enter a message (10+ characters)."
+    }
+  },
+  "cv": {
+    "exportPdf": "Export to PDF",
+    "a4Preview": "A4 preview",
+    "about": [
+      "Passionate about science and a lifelong self-learner, I completed a cybersecurity engineering degree while running a web-development micro-business on the side.",
+      "Today I pair a DevSecOps mindset at work with active technical curiosity through maintaining my Homelab. This triptych (Code, Security, Hardware) gives me a holistic view of modern IT systems — and above all feeds my thirst to learn and build.",
+      "In short, a hybrid profile who can both quit Vim and center a div."
+    ],
+    "languages": {
+      "fr": { "name": "French", "level": "Native" },
+      "en": { "name": "English", "level": "Fluent" }
+    },
+    "passions": ["Web development", "Artificial intelligence", "Cybersecurity", "Home automation", "Astronomy", "Aviation", "Climbing", "Photography"],
+    "experiences": {
+      "airbus": {
+        "title": "Cyber Engineer / Tech Lead - MCS Airbus Defence and Space",
+        "subtitle": "On behalf of Neverhack",
+        "date": "Aug 2023 - present",
+        "paragraphs": [
+          "Through an innovative approach, I significantly optimized and improved many processes — x1400 in compute speed, +175% in accuracy, all while staying ahead of ESA's requirements. I quickly gained responsibility up to becoming technical lead, on fascinating projects such as building a vulnerability-management tool for European ground-segment systems (Egnos, Galileo, CO3D, PNEO...) to meet ESA's requirements.",
+          "I then designed a global security-audit solution covering an entire information system. The tool integrates vulnerability management and prioritization, obsolescence prevention and temporal analysis, ensuring a secure evolution of the system through reporting praised by Airbus.",
+          "Finally, I industrialized this solution into a full web platform (SaaS). Now accessible from every European site, it hosts many projects, makes daily work easier for thousands of Airbus employees and saves Airbus several million euros every year."
+        ]
+      },
+      "viveris": {
+        "title": "Full-stack Lead Dev - Viveris",
+        "date": "Feb 2023 - Aug 2023",
+        "paragraphs": [
+          "I led a team of three junior web developers to design and build an application for organizing remote work across the company, with 3D visualization. The project was delivered end to end (from specification to release) using agile methods, making for the best possible first professional experience overall."
+        ]
+      },
+      "altab": {
+        "title": "Self-employed - Altab",
+        "date": "Since Aug 2020",
+        "paragraphs": [
+          "During my studies, I built a micro-business under France's National Student-Entrepreneur Status. It let me launch many projects:"
+        ],
+        "bullets": [
+          "Full-stack + 3D development of my micro-business website",
+          "Frontend + 3D for a PixelWar-style community project (>100k users)",
+          "Full-stack platform hosting >60 GB of photos with lazy-loaded rendering",
+          "Full-stack e-commerce for a client selling lithium boat batteries",
+          "Vertex-cover algorithm with visualization",
+          "Home-automation project (Jarvis-style) with an embedded LLM to control a house"
+        ]
+      }
+    },
+    "education": {
+      "engineer": { "degree": "Cybersecurity Engineer", "date": "Jul 2023" },
+      "entrepreneur": { "degree": "Student-Entrepreneur Diploma", "date": "Jul 2023" }
+    },
+    "skillDomains": {
+      "dev": "Development",
+      "security": "Security",
+      "infra": "Infra & Ops",
+      "systems": "Systems",
+      "soft": "Soft skills"
+    },
+    "softSkills": {
+      "selftaught": "Self-taught",
+      "autonomous": "Autonomous",
+      "curious": "Curious",
+      "creative": "Creative",
+      "independent": "Independent",
+      "passionate": "Passionate"
     }
   },
   "about": { "title": "About" },
