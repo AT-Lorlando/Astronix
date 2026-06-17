@@ -12,6 +12,8 @@ import { middleware } from './kernel.js'
 
 const AuthController = () => import('#controllers/auth_controller')
 const ContactController = () => import('#controllers/contact_controller')
+const AdminSessionController = () => import('#controllers/admin/session_controller')
+const AdminMessagesController = () => import('#controllers/admin/messages_controller')
 
 router.get('/', async () => {
   return {
@@ -19,11 +21,40 @@ router.get('/', async () => {
   }
 })
 
-// Auth routes
-router.post('/signup', [AuthController, 'signup']).use(middleware.guest())
-router.post('/login', [AuthController, 'login']).use(middleware.guest())
-router.post('/logout', [AuthController, 'logout']).use(middleware.auth())
-router.get('/me', [AuthController, 'me']).use(middleware.auth())
+/*
+| JSON API. `forceJson` makes validator/auth errors respond as JSON instead
+| of the framework's HTML negotiation — kept off the admin panel below.
+*/
+router
+  .group(() => {
+    router.post('/signup', [AuthController, 'signup']).use(middleware.guest())
+    router.post('/login', [AuthController, 'login']).use(middleware.guest())
+    router.post('/logout', [AuthController, 'logout']).use(middleware.auth())
+    router.get('/me', [AuthController, 'me']).use(middleware.auth())
 
-// Public contact form (no auth)
-router.post('/contact', [ContactController, 'store'])
+    // Public contact form (no auth)
+    router.post('/contact', [ContactController, 'store'])
+  })
+  .use(middleware.forceJson())
+
+/*
+| Server-rendered admin panel (Edge views). Lives outside the `forceJson`
+| group so it can render HTML and redirect on auth failure.
+*/
+router
+  .group(() => {
+    router.get('/login', [AdminSessionController, 'showLogin'])
+    router.post('/login', [AdminSessionController, 'login'])
+
+    router
+      .group(() => {
+        router.post('/logout', [AdminSessionController, 'logout'])
+        router.get('/', [AdminMessagesController, 'index'])
+        router.get('/messages/:id', [AdminMessagesController, 'show'])
+        router.post('/messages/:id/read', [AdminMessagesController, 'markRead'])
+        router.post('/messages/:id/unread', [AdminMessagesController, 'markUnread'])
+        router.post('/messages/:id/delete', [AdminMessagesController, 'destroy'])
+      })
+      .use(middleware.auth())
+  })
+  .prefix('/admin')
