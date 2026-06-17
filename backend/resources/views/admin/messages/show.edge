@@ -1,48 +1,60 @@
 @component('components/admin_layout', { title: 'Message — Admin' })
-  <header class="bar">
-    <h1>Message</h1>
-    <a href="/admin" class="btn">← Retour</a>
-  </header>
+  <div class="wrap">
+    <header class="bar">
+      <div class="brand">
+        <span class="kicker">Astronix · admin</span>
+        <h1>Message</h1>
+        @if(message.readAt)
+          <span class="badge neutral">Lu</span>
+        @else
+          <span class="badge"><span class="dot"></span> Non lu</span>
+        @end
+      </div>
+      <a href="/admin" class="btn btn-sm btn-ghost">← Retour</a>
+    </header>
 
-  <div class="card">
-    <dl>
-      <dt>Nom</dt>
-      <dd>{{ message.name }}</dd>
-      <dt>E-mail</dt>
-      <dd><a href="mailto:{{ message.email }}">{{ message.email }}</a></dd>
-      <dt>Reçu le</dt>
-      <dd>{{ message.createdAt.toFormat('dd/MM/yyyy HH:mm') }}</dd>
-      <dt>Statut</dt>
-      <dd>{{ message.readAt ? 'Lu le ' + message.readAt.toFormat('dd/MM/yyyy HH:mm') : 'Non lu' }}</dd>
-      @if(message.ipAddress)
-        <dt>IP</dt>
-        <dd class="muted">{{ message.ipAddress }}</dd>
-      @end
-    </dl>
+    <div class="card">
+      <dl class="meta">
+        <dt>De</dt>
+        <dd>{{ message.name }}</dd>
+        <dt>E-mail</dt>
+        <dd><a class="mono" href="mailto:{{ message.email }}">{{ message.email }}</a></dd>
+        <dt>Reçu</dt>
+        <dd class="mono">{{ message.createdAt.toFormat('dd/MM/yyyy à HH:mm') }}</dd>
+        @if(message.readAt)
+          <dt>Lu</dt>
+          <dd class="mono">{{ message.readAt.toFormat('dd/MM/yyyy à HH:mm') }}</dd>
+        @end
+        @if(message.ipAddress)
+          <dt>IP</dt>
+          <dd class="mono muted">{{ message.ipAddress }}</dd>
+        @end
+      </dl>
 
-    <div class="msg-body">{{ message.message }}</div>
-  </div>
+      <div class="msg-body">{{ message.message }}</div>
 
-  <div class="actions">
-    <a href="mailto:{{ message.email }}?subject=Re: votre message" class="btn btn-primary">Répondre</a>
+      <div class="actions">
+        <a href="mailto:{{ message.email }}?subject=Re: votre message" class="btn btn-primary">Répondre</a>
 
-    @if(message.readAt)
-      <form method="POST" action="/admin/messages/{{ message.id }}/unread" class="inline">
-        <button type="submit" class="btn">Marquer non lu</button>
-      </form>
-    @else
-      <form method="POST" action="/admin/messages/{{ message.id }}/read" class="inline">
-        <button type="submit" class="btn">Marquer lu</button>
-      </form>
-    @end
+        @if(message.readAt)
+          <form method="POST" action="/admin/messages/{{ message.id }}/unread" class="inline">
+            <button type="submit" class="btn">Marquer non lu</button>
+          </form>
+        @else
+          <form method="POST" action="/admin/messages/{{ message.id }}/read" class="inline">
+            <button type="submit" class="btn">Marquer lu</button>
+          </form>
+        @end
 
-    <form
-      method="POST"
-      action="/admin/messages/{{ message.id }}/delete"
-      class="inline"
-      onsubmit="return confirm('Supprimer ce message ?')"
-    >
-      <button type="submit" class="btn btn-danger">Supprimer</button>
-    </form>
+        <form
+          method="POST"
+          action="/admin/messages/{{ message.id }}/delete"
+          class="inline"
+          onsubmit="return confirm('Supprimer ce message ?')"
+        >
+          <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+      </div>
+    </div>
   </div>
 @end
