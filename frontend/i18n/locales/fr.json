@@ -3,42 +3,9 @@
   "common": {
     "home": "Accueil",
     "loading": "Chargement...",
-    "email": "E-mail",
-    "password": "Mot de passe",
-    "fullName": "Nom complet"
+    "email": "E-mail"
   },
-  "nav": { "signIn": "Connexion", "about": "À propos", "projects": "Projets", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
-  "home": {
-    "welcome": "Bienvenue",
-    "viewProfile": "Voir le profil",
-    "getStarted": "Commencer",
-    "getStartedSubtitle": "Créez un compte pour continuer",
-    "createAccount": "Créer un compte"
-  },
-  "login": {
-    "title": "Bon retour",
-    "subtitle": "Connectez-vous pour continuer",
-    "submit": "Se connecter",
-    "submitting": "Connexion...",
-    "noAccount": "Pas encore de compte ? Inscrivez-vous",
-    "error": "Échec de la connexion. Veuillez réessayer."
-  },
-  "signup": {
-    "title": "Créer un compte",
-    "subtitle": "Rejoignez-nous dès aujourd'hui",
-    "submit": "Créer un compte",
-    "submitting": "Création du compte...",
-    "hasAccount": "Vous avez déjà un compte ? Connectez-vous",
-    "error": "Échec de l'inscription. Veuillez réessayer."
-  },
-  "profile": {
-    "fallbackName": "Utilisateur",
-    "id": "ID",
-    "editProfile": "Modifier le profil",
-    "settings": "Paramètres",
-    "backToHome": "Retour à l'accueil",
-    "signOut": "Se déconnecter"
-  },
+  "nav": { "about": "À propos", "projects": "Projets", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "hero": {
     "positioning": "Ingénieur cyber & full-stack — je conçois des produits IA locaux, souverains, sans cloud.",
     "statusLine": "> yui · local · 0 cloud calls",
