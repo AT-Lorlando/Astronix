@@ -37,6 +37,13 @@ export default await Env.create(new URL('../', import.meta.url), {
   SESSION_DRIVER: Env.schema.enum(['cookie', 'memory'] as const),
 
   /*
+  | Set to true ONLY when serving over HTTPS. Leave unset/false for http://
+  | (LAN) deployments, otherwise the browser drops the session cookie and the
+  | admin login can't persist.
+  */
+  SESSION_COOKIE_SECURE: Env.schema.boolean.optional(),
+
+  /*
   |----------------------------------------------------------
   | Admin panel credentials (optional). Consumed by
   | database/seeders/admin_seeder.ts (`node ace db:seed`) to

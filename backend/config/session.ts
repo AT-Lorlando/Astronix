@@ -25,7 +25,13 @@ const sessionConfig = defineConfig({
   cookie: {
     path: '/',
     httpOnly: true,
-    secure: app.inProduction,
+    /**
+     * A `Secure` cookie is never sent by the browser over plain HTTP, which
+     * breaks the admin login when the app is served over http:// (e.g. on a
+     * LAN). Defaults to false so it works out of the box; set
+     * SESSION_COOKIE_SECURE=true only when serving over HTTPS.
+     */
+    secure: env.get('SESSION_COOKIE_SECURE', false),
     sameSite: 'lax',
   },
 
