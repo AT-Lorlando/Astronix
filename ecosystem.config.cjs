@@ -6,25 +6,14 @@
 module.exports = {
   apps: [
     {
-      name: 'backend',
+      name: 'astronix-backend',
       cwd: './backend',
       script: 'build/bin/server.js',
-      env: {
-        NODE_ENV: 'production',
-        HOST: '0.0.0.0',
-        PORT: 3333,
-      },
     },
     {
-      name: 'frontend',
+      name: 'astronix-frontend',
       cwd: './frontend',
       script: '.output/server/index.mjs',
-      env: {
-        NODE_ENV: 'production',
-        HOST: '0.0.0.0',
-        PORT: 3000,
-        NUXT_PUBLIC_API_BASE: 'http://localhost:3333',
-      },
     },
   ],
 }
