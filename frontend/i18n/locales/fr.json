@@ -5,7 +5,7 @@
     "loading": "Chargement...",
     "email": "E-mail"
   },
-  "nav": { "about": "À propos", "projects": "Projets", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
+  "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "hero": {
     "positioning": "Ingénieur cyber & full-stack — je conçois des produits IA locaux, souverains, sans cloud.",
     "statusLine": "> yui · local · 0 cloud calls",
@@ -51,6 +51,73 @@
       "name": "Indique ton nom (2 caractères min).",
       "email": "Indique un email valide.",
       "message": "Indique un message (10 caractères min)."
+    }
+  },
+  "cv": {
+    "exportPdf": "Exporter en PDF",
+    "a4Preview": "Aperçu A4",
+    "about": [
+      "Passionné par la science et éternel autodidacte, j'ai suivi un cursus d'ingénieur en cybersécurité tout en créant une micro-entreprise de développement web en parallèle.",
+      "Aujourd'hui, j'allie une posture DevSecOps au travail à une veille technique active via la maintenance de mon Homelab. Ce triptyque (Code, Sécurité, Hardware) me permet de développer une vision holistique des systèmes informatiques modernes, et surtout assouvir ma soif d'apprendre et de construire.",
+      "Bref, un profil hybride qui sait quitter Vim et centrer une div."
+    ],
+    "languages": {
+      "fr": { "name": "Français", "level": "Natif" },
+      "en": { "name": "Anglais", "level": "Courant" }
+    },
+    "passions": ["Développement Web", "Cybersécurité","Intelligence artificielle", "Domotique", "Astronomie", "Aviation", "Escalade", "Photographie"],
+    "experiences": {
+      "airbus": {
+        "title": "Ingénieur cyber / Tech Lead - MCS Airbus Defence and Space",
+        "subtitle": "On behalf of Neverhack",
+        "date": "août 2023 - aujourd'hui",
+        "paragraphs": [
+          "Grâce à une approche innovante, j'ai permis d'optimiser et d'améliorer significativement de nombreux processus. x1400 en vitesse de calcul, +175% de précision, tout en étant en avance sur les demandes de l'ESA. J'ai ainsi rapidement gagné en responsabilités jusqu'à devenir responsable technique, le tout sur des projets très intéressants comme le développement d'outil de gestion de vulnérabilités sur des systèmes segments sol Européens (Egnos, Galiléo, CO3D, PNEO...) pour répondre aux exigences de l'ESA.",
+          "Par la suite, j'ai conçu une solution d'audit de sécurité global couvrant l'ensemble d'un SI. Cet outil intègre la gestion et la priorisation des vulnérabilités, la prévention de l'obsolescence et une analyse temporelle, garantissant une évolution sécurisée du système via un reporting apprécié par Airbus.",
+          "Enfin, j'ai industrialisé cette solution en la transformant en une plateforme web (SaaS) complète. Désormais accessible depuis tous les sites européens, elle héberge de nombreux projets, facilite le quotidien de milliers d'Airbusiens et fait économiser plusieurs millions d'euros par an à Airbus."
+        ]
+      },
+      "viveris": {
+        "title": "Lead Dev fullstack - Viveris",
+        "date": "février 2023 - août 2023",
+        "paragraphs": [
+          "J'ai pris le lead d'une équipe de trois stagiaires développeurs Web pour la conception et le développement d'une application permettant d'organiser le télétravail dans l'entreprise, avec une visualisation en 3D. Ce projet a été réalisé de bout en bout (du cahier des charges à la livraison) en méthode agile, offrant dans sa globalité la meilleure première expérience professionnelle possible."
+        ]
+      },
+      "altab": {
+        "title": "Auto entrepreneur - Altab",
+        "date": "Depuis août 2020",
+        "paragraphs": [
+          "Durant mes études, j'ai pu construire une micro-entreprise dans le cadre du Statut National des Etudiants Entrepreneurs. J'ai pu en profiter pour monter de nombreux projets :"
+        ],
+        "bullets": [
+          "Développement Fullstack + 3D du site de ma micro-entreprise",
+          "Frontend + 3D pour un projet communautaire de type PixelWar (>100k utilisateurs)",
+          "Plateforme Fullstack hébergeant >60 Go de photos avec rendu via lazy-loading",
+          "E-commerce Fullstack pour un client vendant des batteries lithium pour bateaux",
+          "Algorithme de vertex cover avec visualisation",
+          "Projet domotique (type Jarvis) avec LLM intégré pour contrôler une maison"
+        ]
+      }
+    },
+    "education": {
+      "engineer": { "degree": "Ingénieur en Cybersécurité", "date": "juillet 2023" },
+      "entrepreneur": { "degree": "Diplôme étudiant-entrepreneur", "date": "juillet 2023" }
+    },
+    "skillDomains": {
+      "dev": "Développement",
+      "security": "Sécurité",
+      "infra": "Infra & Ops",
+      "systems": "Systèmes",
+      "soft": "Savoir-être"
+    },
+    "softSkills": {
+      "selftaught": "Autodidacte",
+      "autonomous": "Autonome",
+      "curious": "Curieux",
+      "creative": "Créatif",
+      "independent": "Indépendant",
+      "passionate": "Passionné"
     }
   },
   "about": { "title": "À propos" },
