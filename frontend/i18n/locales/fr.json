@@ -7,7 +7,7 @@
   },
   "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "hero": {
-    "positioning": "Ingénieur cyber & full-stack — je conçois des produits IA locaux, souverains, sans cloud.",
+    "positioning": "Ingénieur cyber et full-stack. Je conçois des produits IA qui tournent en local, sans cloud.",
     "statusLine": "> yui · local · 0 cloud calls",
     "ctaProjects": "Voir les projets",
     "ctaContact": "Contact",
@@ -16,8 +16,8 @@
   "projects": {
     "title": "Projets",
     "back": "Retour aux projets",
-    "subtitle": "Des produits local-first, conçus de bout en bout.",
-    "viewDemo": "Voir la démo",
+    "subtitle": "Des projets local-first, que je développe de A à Z.",
+    "viewProject": "Voir le projet",
     "viewGithub": "Voir sur GitHub",
     "featured": "Projet phare",
     "architecture": "Architecture",
@@ -25,32 +25,44 @@
     "notFound": "Projet introuvable",
     "yui": {
       "tagline": "Assistant vocal IA 100% local",
-      "pitch": "Assistant vocal IA 100% local — pilote toute la maison, zéro cloud. Wakeword + Whisper + XTTS, agent LLM, architecture MCP modulaire.",
-      "architecture": "La détection de wakeword alimente Whisper (STT) ; un agent LLM planifie les actions via une couche d'outils MCP modulaire ; XTTS gère la synthèse vocale. Tout tourne en local.",
-      "features": ["Détection de wakeword + transcription Whisper", "Agent LLM local avec utilisation d'outils", "Architecture MCP modulaire pour piloter la maison", "Synthèse vocale XTTS — zéro appel cloud"]
+      "pitch": "Assistant vocal IA qui pilote la maison, entièrement en local et sans cloud.",
+      "architecture": "La détection de wakeword alimente Whisper (STT) ; un agent LLM planifie les actions via une couche d'outils MCP modulaire ; XTTS gère la synthèse vocale. L'ensemble fonctionne en local.",
+      "features": ["Détection de wakeword + transcription Whisper", "Agent LLM local avec utilisation d'outils", "Architecture MCP modulaire pour piloter la maison", "Synthèse vocale XTTS, sans appel cloud"]
+    },
+    "hisho": {
+      "tagline": "Portfolio professionnel augmenté par IA",
+      "pitch": "Portfolio technique augmenté par un LLM, qui transforme du texte libre en expériences, compétences et CV.",
+      "architecture": "Nuxt 4 en front, AdonisJS 6 et PostgreSQL en back (modèles Lucid). L'extraction passe par un endpoint compatible OpenAI en streaming SSE : le texte collé est transformé en JSON structuré (expériences, missions, compétences), réparé s'il est tronqué, puis importé de façon idempotente. La clé du modèle reste côté serveur.",
+      "features": ["Extraction LLM depuis du texte libre", "Données en PostgreSQL via Lucid", "Réponses du modèle en streaming SSE", "Génération de dossiers, mails et CV"]
+    },
+    "koya": {
+      "tagline": "Panneau de contrôle du homelab",
+      "pitch": "Interface unique pour piloter le homelab : hosts, applications, déploiements et routes nginx.",
+      "architecture": "Nuxt 4, AdonisJS 6 et PostgreSQL. Les hosts et applications sont enregistrés en base ; l'outil lit les configs nginx pour en déduire les zones existantes et construit les routes (proxy ou redirection) vers un host et un port connus, en distinguant les domaines locaux (.home.arpa, certificat mkcert) des domaines exposés via Cloudflare.",
+      "features": ["Inventaire des hosts et applications", "Gestion des routes nginx (proxy, redirections)", "Zones locales (.home.arpa) ou exposées via Cloudflare", "Suivi des déploiements"]
     },
     "yoji": {
       "tagline": "Todos local-first par-dessus Obsidian",
-      "pitch": "Todo + Obsidian, open-source, full local, synchro Git, sans serveur. Tes données restent à toi.",
-      "architecture": "[À COMPLÉTER — décris l'archi de Yoji]",
-      "features": ["Open-source et 100% local", "Synchro par Git, sans serveur", "S'appuie sur ton coffre Obsidian"]
+      "pitch": "Todos par-dessus Obsidian, en local et synchronisés via Git. Vos données restent les vôtres.",
+      "architecture": "Application Nuxt empaquetée en mobile via Capacitor. Les tâches sont des cases à cocher Markdown, lues et écrites directement dans le coffre Obsidian ; pas de base de données, le coffre est la seule source de vérité. La synchronisation entre appareils passe par Git, sans serveur central.",
+      "features": ["Open-source et 100% local", "Synchro par Git, sans serveur", "S'appuie sur votre coffre Obsidian"]
     }
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Un projet, une question ? Écris-moi.",
+    "subtitle": "Un projet, une question ? Écrivez-moi.",
     "name": "Nom",
     "email": "Email",
     "message": "Message",
     "submit": "Envoyer",
     "submitting": "Envoi...",
-    "success": "Merci — ton message a bien été envoyé.",
-    "error": "Une erreur est survenue. Réessaie.",
-    "rateLimited": "Trop de tentatives. Patiente un instant.",
+    "success": "Merci, votre message a bien été envoyé.",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "rateLimited": "Trop de tentatives. Veuillez patienter un instant.",
     "errors": {
-      "name": "Indique ton nom (2 caractères min).",
-      "email": "Indique un email valide.",
-      "message": "Indique un message (10 caractères min)."
+      "name": "Indiquez votre nom (2 caractères min).",
+      "email": "Indiquez un email valide.",
+      "message": "Indiquez un message (10 caractères min)."
     }
   },
   "cv": {
@@ -121,5 +133,5 @@
     }
   },
   "about": { "title": "À propos" },
-  "footer": { "tagline": "Local, souverain, sans cloud.", "email": "Email", "github": "GitHub" }
+  "footer": { "madeWith": "Made with Nuxt & Three.js", "email": "Email", "github": "GitHub" }
 }
