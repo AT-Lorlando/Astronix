@@ -87,6 +87,8 @@ let tiltY = 0
 let tiltTargetX = 0
 let tiltTargetY = 0
 let removeOrientationGesture: (() => void) | null = null
+// Last viewport width — used to ignore height-only resizes (mobile URL bar on scroll).
+let lastWidth = 0
 
 // Mouse → galaxy-plane projection for the repel interaction.
 const ndc = new THREE.Vector2(999, 999)
@@ -196,7 +198,10 @@ const init = () => {
   renderer = new THREE.WebGLRenderer({ canvas: canvas.value, antialias: true, alpha: true })
   renderer.setClearColor(0x000000, 0)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  // updateStyle=false: let the CSS (h-full/w-full) size the canvas inside the fixed
+  // wrapper, so three.js doesn't pin it to a pixel height that the mobile URL bar shifts.
+  renderer.setSize(window.innerWidth, window.innerHeight, false)
+  lastWidth = window.innerWidth
 
   reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reducedMotion) renderFrame()
@@ -205,9 +210,13 @@ const init = () => {
 
 const onResize = () => {
   if (!renderer || !camera) return
+  // On mobile the address bar hiding/showing during scroll fires resize with only a
+  // height change — skip those so the fixed galaxy stays put while scrolling.
+  if (isCoarse && window.innerWidth === lastWidth) return
+  lastWidth = window.innerWidth
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setSize(window.innerWidth, window.innerHeight, false)
   uniforms.uSize.value = 26 * Math.min(window.devicePixelRatio, 1.5)
   if (reducedMotion) renderFrame()
 }
@@ -263,9 +272,9 @@ const onVisibility = () => {
 onMounted(() => {
   // nextTick: ensure the <canvas> template ref is populated before init.
   nextTick(() => {
+    isCoarse = window.matchMedia('(pointer: coarse)').matches
     init()
     window.addEventListener('resize', onResize)
-    isCoarse = window.matchMedia('(pointer: coarse)').matches
     if (isCoarse) {
       // Mobile: drop the mouse-repel interaction, steer the camera with the gyroscope instead.
       enableOrientation()
