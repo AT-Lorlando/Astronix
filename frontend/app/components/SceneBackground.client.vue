@@ -78,7 +78,15 @@ let geometry: THREE.BufferGeometry
 let material: THREE.ShaderMaterial
 let animationId = 0
 let reducedMotion = false
+let isCoarse = false
 const clock = new THREE.Clock()
+
+// Device-orientation camera tilt (mobile only): smoothed offsets toward target.
+let tiltX = 0
+let tiltY = 0
+let tiltTargetX = 0
+let tiltTargetY = 0
+let removeOrientationGesture: (() => void) | null = null
 
 // Mouse → galaxy-plane projection for the repel interaction.
 const ndc = new THREE.Vector2(999, 999)
@@ -154,10 +162,12 @@ const renderFrame = () => {
   const t = clock.getElapsedTime()
   uniforms.uTime.value = t
 
-  // Gentle camera auto-orbit.
-  camera.position.x = Math.cos(t * 0.05) * 5
+  // Gentle camera auto-orbit, nudged by device tilt on mobile.
+  tiltX += (tiltTargetX - tiltX) * 0.05
+  tiltY += (tiltTargetY - tiltY) * 0.05
+  camera.position.x = Math.cos(t * 0.05) * 5 + tiltX
   camera.position.z = Math.sin(t * 0.05) * 5
-  camera.position.y = 3
+  camera.position.y = 3 + tiltY * 0.8
   camera.lookAt(0, 0, 0)
 
   // Project the cursor onto the galaxy plane for the repel uniform.
@@ -207,6 +217,38 @@ const onPointerMove = (e: PointerEvent) => {
   ndc.y = -(e.clientY / window.innerHeight) * 2 + 1
 }
 
+const onDeviceOrientation = (e: DeviceOrientationEvent) => {
+  // gamma = left/right tilt [-90,90], beta = front/back tilt [-180,180].
+  // Map a comfortable ±30° window (beta neutral ~45°) to [-1, 1] for a subtle nudge.
+  const clamp = (v: number) => Math.max(-1, Math.min(1, v))
+  tiltTargetX = clamp((e.gamma ?? 0) / 30)
+  tiltTargetY = clamp(((e.beta ?? 0) - 45) / 30)
+}
+
+// Enable orientation-driven camera tilt on mobile, handling the iOS 13+ permission
+// prompt (which must be triggered from a user gesture).
+const enableOrientation = () => {
+  const DOE = window.DeviceOrientationEvent as
+    | (typeof DeviceOrientationEvent & { requestPermission?: () => Promise<'granted' | 'denied'> })
+    | undefined
+  if (!DOE) return
+
+  const start = () => window.addEventListener('deviceorientation', onDeviceOrientation)
+
+  if (typeof DOE.requestPermission === 'function') {
+    const ask = () => {
+      DOE.requestPermission!()
+        .then((state) => { if (state === 'granted') start() })
+        .catch(() => {})
+      removeOrientationGesture?.()
+    }
+    window.addEventListener('touchend', ask, { once: true })
+    removeOrientationGesture = () => window.removeEventListener('touchend', ask)
+  } else {
+    start()
+  }
+}
+
 const onVisibility = () => {
   if (document.hidden) {
     if (animationId) {
@@ -223,7 +265,13 @@ onMounted(() => {
   nextTick(() => {
     init()
     window.addEventListener('resize', onResize)
-    window.addEventListener('pointermove', onPointerMove)
+    isCoarse = window.matchMedia('(pointer: coarse)').matches
+    if (isCoarse) {
+      // Mobile: drop the mouse-repel interaction, steer the camera with the gyroscope instead.
+      enableOrientation()
+    } else {
+      window.addEventListener('pointermove', onPointerMove)
+    }
     document.addEventListener('visibilitychange', onVisibility)
   })
 })
@@ -232,6 +280,8 @@ onBeforeUnmount(() => {
   if (animationId) cancelAnimationFrame(animationId)
   window.removeEventListener('resize', onResize)
   window.removeEventListener('pointermove', onPointerMove)
+  window.removeEventListener('deviceorientation', onDeviceOrientation)
+  removeOrientationGesture?.()
   document.removeEventListener('visibilitychange', onVisibility)
   geometry?.dispose()
   material?.dispose()
