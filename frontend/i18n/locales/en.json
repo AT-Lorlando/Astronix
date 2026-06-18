@@ -7,8 +7,8 @@
   },
   "nav": { "about": "About", "projects": "Projects", "cv": "CV", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
   "hero": {
-    "positioning": "Cyber and full-stack engineer. I build AI products that run locally, without the cloud.",
-    "statusLine": "> yui · local · 0 cloud calls",
+    "positioning": "Cyber and full-stack engineer. I build products to make my life easier, that run locally, without the cloud, and with AI.",
+    "statusLine": "> Seeking the perfect balance between being stimulated, usefull, and valued",
     "ctaProjects": "View projects",
     "ctaContact": "Contact",
     "ctaGithub": "GitHub"

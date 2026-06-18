@@ -7,8 +7,8 @@
   },
   "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "hero": {
-    "positioning": "Ingénieur cyber et full-stack. Je conçois des produits IA qui tournent en local, sans cloud.",
-    "statusLine": "> yui · local · 0 cloud calls",
+    "positioning": "Ingénieur cyber et full-stack. Je conçois des produits pour me faciliter la vie, en local, sans cloud, avec de l'IA.",
+    "statusLine": "> Cherche l'alliance parfaite entre etre stimulé, utile, et valorisé",
     "ctaProjects": "Voir les projets",
     "ctaContact": "Contact",
     "ctaGithub": "GitHub"

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import * as THREE from 'three'
 
+// Max number of asteroids attracting stars at once (pool size, also the shader loop bound).
+const MAX_ASTEROIDS = 8
+
 // Green spiral galaxy adapted from the reference easter.vue, recolored to the
 // site's single green accent, textured with /public/dot.png, tuned to sit behind
 // the page content, with a mouse-repel interaction.
@@ -19,6 +22,9 @@ const vertexShader = /* glsl */ `
   uniform float uTime;
   uniform float uSize;
   uniform vec2 uMouse;
+  uniform vec2 uAstroids[${MAX_ASTEROIDS}];
+  uniform float uAstroidStrengths[${MAX_ASTEROIDS}];
+  uniform float uAstroidRadius;
   uniform float uRepelRadius;
   uniform float uRepelStrength;
   attribute float aScale;
@@ -44,6 +50,18 @@ const vertexShader = /* glsl */ `
       float force = (1.0 - distToMouse / uRepelRadius) * uRepelStrength;
       modelPosition.x += dir.x * force;
       modelPosition.z += dir.y * force;
+    }
+
+    // Asteroid attract: pull stars toward each active asteroid as it sweeps past.
+    // Smoothstep falloff (instead of linear) softens the edge so the radius boundary isn't visible.
+    for (int i = 0; i < ${MAX_ASTEROIDS}; i++) {
+      float d = distance(modelPosition.xz, uAstroids[i]);
+      if (d < uAstroidRadius) {
+        vec2 dir = normalize(uAstroids[i] - modelPosition.xz);
+        float force = smoothstep(uAstroidRadius, 0.0, d) * uAstroidStrengths[i];
+        modelPosition.x += dir.x * force;
+        modelPosition.z += dir.y * force;
+      }
     }
 
     vec4 viewPosition = viewMatrix * modelPosition;
@@ -80,6 +98,10 @@ let animationId = 0
 let reducedMotion = false
 let isCoarse = false
 const clock = new THREE.Clock()
+// Manual elapsed accumulator: we read getDelta() once per frame for the asteroid,
+// so we can't also call getElapsedTime() (it would consume the same delta).
+let elapsed = 0
+
 
 // Device-orientation camera tilt (mobile only): smoothed offsets toward target.
 let tiltX = 0
@@ -103,9 +125,27 @@ const uniforms = {
   uOpacity: { value: 0.7 },
   uTexture: { value: null as THREE.Texture | null },
   uMouse: { value: new THREE.Vector2(999, 999) },
+  uAstroids: { value: Array.from({ length: MAX_ASTEROIDS }, () => new THREE.Vector2(999, 999)) },
+  uAstroidStrengths: { value: new Array(MAX_ASTEROIDS).fill(0) as number[] },
+  uAstroidRadius: { value: 2.5 },
   uRepelRadius: { value: 1.2 },
   uRepelStrength: { value: 0.6 },
 }
+
+// Peak attraction strength, only reached when an asteroid is near the star plane.
+const ASTROID_STRENGTH = 0.5
+const ASTROID_SPEED = 3.5 // unités/seconde
+
+interface Asteroid {
+  active: boolean
+  pos: THREE.Vector3
+  from: THREE.Vector3
+  to: THREE.Vector3
+  t: number
+  sprite: THREE.Sprite
+  material: THREE.SpriteMaterial
+}
+const asteroids: Asteroid[] = []
 
 const buildGalaxy = () => {
   geometry = new THREE.BufferGeometry()
@@ -158,10 +198,38 @@ const buildGalaxy = () => {
 
   points = new THREE.Points(geometry, material)
   scene.add(points)
+
+  // Asteroid pool: each head is a white, additive sprite (same dot texture) that looks
+  // like a comet consistent with the galaxy. All hidden until a click launches one.
+  for (let i = 0; i < MAX_ASTEROIDS; i++) {
+    const mat = new THREE.SpriteMaterial({
+      map: uniforms.uTexture.value,
+      color: new THREE.Color('#ffffff'),
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      opacity: 0,
+    })
+    const sprite = new THREE.Sprite(mat)
+    sprite.scale.setScalar(0.15)
+    sprite.visible = false
+    scene.add(sprite)
+    asteroids.push({
+      active: false,
+      pos: new THREE.Vector3(),
+      from: new THREE.Vector3(),
+      to: new THREE.Vector3(),
+      t: 0,
+      sprite,
+      material: mat,
+    })
+  }
 }
 
 const renderFrame = () => {
-  const t = clock.getElapsedTime()
+  const dt = clock.getDelta()
+  elapsed += dt
+  const t = elapsed
   uniforms.uTime.value = t
 
   // Gentle camera auto-orbit, nudged by device tilt on mobile.
@@ -171,6 +239,32 @@ const renderFrame = () => {
   camera.position.z = Math.sin(t * 0.05) * 5
   camera.position.y = 3 + tiltY * 0.8
   camera.lookAt(0, 0, 0)
+
+  for (let i = 0; i < asteroids.length; i++) {
+    const a = asteroids[i]!
+    if (a.active) {
+      const dist = a.from.distanceTo(a.to)
+      a.t += (ASTROID_SPEED * dt) / dist // normalized progression 0→1
+      if (a.t >= 1) {
+        a.t = 1
+        a.active = false
+      }
+      a.pos.lerpVectors(a.from, a.to, a.t)
+      uniforms.uAstroids.value[i]!.set(a.pos.x, a.pos.z)
+      // Only attract when the asteroid is near the star plane (y≈0); fade the force
+      // out as it climbs above or dives below, so it doesn't pull stars from afar.
+      const planeFalloff = Math.max(0, 1 - Math.abs(a.pos.y) / 1.5)
+      uniforms.uAstroidStrengths.value[i] = ASTROID_STRENGTH * planeFalloff
+      a.sprite.position.copy(a.pos)
+      a.sprite.visible = true
+      a.material.opacity = Math.sin(a.t * Math.PI) // fade in then out along the path
+    } else if (a.sprite.visible) {
+      // Done: hide the head and stop attracting (otherwise stars stay clumped at the end).
+      a.sprite.visible = false
+      uniforms.uAstroids.value[i]!.set(999, 999)
+      uniforms.uAstroidStrengths.value[i] = 0
+    }
+  }
 
   // Project the cursor onto the galaxy plane for the repel uniform.
   raycaster.setFromCamera(ndc, camera)
@@ -224,6 +318,39 @@ const onResize = () => {
 const onPointerMove = (e: PointerEvent) => {
   ndc.x = (e.clientX / window.innerWidth) * 2 - 1
   ndc.y = -(e.clientY / window.innerHeight) * 2 + 1
+}
+
+const onClick = (e: MouseEvent) => {
+  ndc.x = (e.clientX / window.innerWidth) * 2 - 1
+  ndc.y = -(e.clientY / window.innerHeight) * 2 + 1
+  raycaster.setFromCamera(ndc, camera)
+  if (raycaster.ray.intersectPlane(plane, hit)) {
+    launchAsteroid(hit.x, hit.z)
+  }
+}
+
+// Spawn the asteroid high up, on the half of the sky opposite the camera, then
+// dive it diagonally down onto the clicked point on the galaxy plane — so it moves
+// away from the viewer (toward the plane) and attracts stars all along its descent.
+const launchAsteroid = (x: number, z: number) => {
+  // Grab a free slot, or recycle the most-advanced one if all are busy.
+  const a = asteroids.find((s) => !s.active) ?? asteroids.reduce((m, s) => (s.t > m.t ? s : m), asteroids[0]!)
+  const camAngle = Math.atan2(camera.position.z, camera.position.x)
+  // Random angle within the opposite semicircle (camAngle + π, ±90°).
+  const angle = camAngle + Math.PI + (Math.random() - 0.5) * Math.PI
+  const r = 11 + Math.random() * 3 // far out
+  const y = 4 + Math.random() * 2 // a bit above the plane
+  a.from.set(Math.cos(angle) * r, y, Math.sin(angle) * r)
+  // Pass through the clicked point (k=1) and keep going below the plane (k>1 → negative Y).
+  const k = 1.6
+  a.to.set(
+    a.from.x + (x - a.from.x) * k,
+    a.from.y * (1 - k),
+    a.from.z + (z - a.from.z) * k,
+  )
+  a.pos.copy(a.from)
+  a.t = 0
+  a.active = true
 }
 
 const onDeviceOrientation = (e: DeviceOrientationEvent) => {
@@ -280,6 +407,7 @@ onMounted(() => {
       enableOrientation()
     } else {
       window.addEventListener('pointermove', onPointerMove)
+      window.addEventListener('click', onClick)
     }
     document.addEventListener('visibilitychange', onVisibility)
   })
@@ -289,11 +417,13 @@ onBeforeUnmount(() => {
   if (animationId) cancelAnimationFrame(animationId)
   window.removeEventListener('resize', onResize)
   window.removeEventListener('pointermove', onPointerMove)
+  window.removeEventListener('click', onClick)
   window.removeEventListener('deviceorientation', onDeviceOrientation)
   removeOrientationGesture?.()
   document.removeEventListener('visibilitychange', onVisibility)
   geometry?.dispose()
   material?.dispose()
+  asteroids.forEach((a) => a.material.dispose())
   uniforms.uTexture.value?.dispose()
   renderer?.dispose()
 })
