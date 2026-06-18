@@ -7,7 +7,7 @@
   },
   "nav": { "about": "About", "projects": "Projects", "cv": "CV", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}" },
   "hero": {
-    "positioning": "Cyber & full-stack engineer — I build local, sovereign AI products, with zero cloud.",
+    "positioning": "Cyber and full-stack engineer. I build AI products that run locally, without the cloud.",
     "statusLine": "> yui · local · 0 cloud calls",
     "ctaProjects": "View projects",
     "ctaContact": "Contact",
@@ -16,8 +16,8 @@
   "projects": {
     "title": "Projects",
     "back": "Back to projects",
-    "subtitle": "Local-first products, built end to end.",
-    "viewDemo": "View demo",
+    "subtitle": "Local-first projects, built from end to end.",
+    "viewProject": "View project",
     "viewGithub": "View on GitHub",
     "featured": "Lead project",
     "architecture": "Architecture",
@@ -25,14 +25,26 @@
     "notFound": "Project not found",
     "yui": {
       "tagline": "100% local AI voice assistant",
-      "pitch": "100% local AI voice assistant — controls the whole house, zero cloud. Wakeword + Whisper + XTTS, LLM agent, modular MCP architecture.",
-      "architecture": "Wakeword detection feeds Whisper (STT); an LLM agent plans actions over a modular MCP tool layer; XTTS handles speech synthesis. Everything runs locally.",
-      "features": ["Wakeword detection + Whisper speech-to-text", "Local LLM agent with tool use", "Modular MCP architecture for home control", "XTTS voice synthesis — no cloud calls"]
+      "pitch": "AI voice assistant that runs the home, fully local and cloud-free.",
+      "architecture": "Wakeword detection feeds Whisper (STT); an LLM agent plans actions over a modular MCP tool layer; XTTS handles speech synthesis. The whole pipeline runs locally.",
+      "features": ["Wakeword detection + Whisper speech-to-text", "Local LLM agent with tool use", "Modular MCP architecture for home control", "XTTS voice synthesis, no cloud calls"]
+    },
+    "hisho": {
+      "tagline": "AI-augmented professional portfolio",
+      "pitch": "A technical portfolio augmented by an LLM, turning free-form text into experiences, skills and CVs.",
+      "architecture": "Nuxt 4 on the front, AdonisJS 6 and PostgreSQL on the back (Lucid models). Extraction runs through an OpenAI-compatible endpoint over SSE streaming: pasted text is turned into structured JSON (experiences, missions, skills), repaired if truncated, then imported idempotently. The model key stays server-side.",
+      "features": ["LLM extraction from free-form text", "Data in PostgreSQL via Lucid", "Model responses over SSE streaming", "Generates dossiers, emails and CVs"]
+    },
+    "koya": {
+      "tagline": "Homelab control panel",
+      "pitch": "A single interface to run the homelab: hosts, applications, deployments and nginx routes.",
+      "architecture": "Nuxt 4, AdonisJS 6 and PostgreSQL. Hosts and applications are stored in the database; the tool reads the nginx configs to infer existing zones and builds routes (proxy or redirect) toward a known host and port, telling apart local domains (.home.arpa, mkcert cert) from domains exposed through Cloudflare.",
+      "features": ["Inventory of hosts and applications", "Nginx route management (proxy, redirects)", "Local (.home.arpa) or Cloudflare-exposed zones", "Deployment tracking"]
     },
     "yoji": {
       "tagline": "Local-first todos on top of Obsidian",
-      "pitch": "Todo + Obsidian, open-source, fully local, Git-synced, serverless. Your data stays yours.",
-      "architecture": "[TO COMPLETE — describe Yoji's architecture]",
+      "pitch": "Local-first todos on top of Obsidian, synced over Git. Your data stays yours.",
+      "architecture": "A Nuxt app packaged for mobile with Capacitor. Tasks are Markdown checkboxes, read and written directly in the Obsidian vault; there's no database — the vault is the single source of truth. Syncing between devices goes through Git, with no central server.",
       "features": ["Open-source and fully local", "Git-based sync, no server", "Lives on top of your Obsidian vault"]
     }
   },
@@ -121,5 +133,5 @@
     }
   },
   "about": { "title": "About" },
-  "footer": { "tagline": "Local, sovereign, no cloud.", "email": "Email", "github": "GitHub" }
+  "footer": { "madeWith": "Made with Nuxt & Three.js", "email": "Email", "github": "GitHub" }
 }
