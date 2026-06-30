@@ -68,6 +68,8 @@
   "cv": {
     "exportPdf": "Export to PDF",
     "a4Preview": "A4 preview",
+    "anonymize": "Anonymize",
+    "anonymousName": "Candidate",
     "about": [
       "Passionate about science and a lifelong self-learner, I completed a cybersecurity engineering degree while running a web-development micro-business on the side.",
       "Today I pair a DevSecOps mindset at work with active technical curiosity through maintaining my Homelab. This triptych (Code, Security, Hardware) gives me a holistic view of modern IT systems — and above all feeds my thirst to learn and build.",

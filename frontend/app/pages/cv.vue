@@ -9,9 +9,11 @@ import { Label } from '~/components/ui/label'
 const { t, tm, rt } = useI18n()
 
 const a4Mode = ref(false)                 // bascule l'aperçu écran en format A4 fixe
+const anonymous = ref(false)              // masque les informations personnelles
 const avatarUrl = ref('/profilpic.webp')  // photo servie depuis frontend/public/ ; fallback "RJ" si absente
 
 function exportPDF() {
+  a4Mode.value = true // l'aperçu A4 est obligatoire à l'export : ce qu'on voit = ce qu'on imprime
   window.print()
 }
 
@@ -150,6 +152,10 @@ const skillDomains: { key: string; skills: { label?: string; tKey?: string; fav?
   <!-- Barre d'outils (hors CV, non imprimée) -->
   <div class="toolbar">
     <div class="tgl">
+      <Checkbox id="anon" :model-value="anonymous" @update:model-value="(v) => (anonymous = v === true)" />
+      <Label for="anon" class="cursor-pointer">{{ t('cv.anonymize') }}</Label>
+    </div>
+    <div class="tgl">
       <Checkbox id="a4" :model-value="a4Mode" @update:model-value="(v) => (a4Mode = v === true)" />
       <Label for="a4" class="cursor-pointer">{{ t('cv.a4Preview') }}</Label>
     </div>
@@ -160,10 +166,11 @@ const skillDomains: { key: string; skills: { label?: string; tKey?: string; fav?
     <!-- En-tête ------------------------------------------------------------ -->
     <header class="cv-head">
       <Avatar class="avatar">
-        <AvatarImage :src="avatarUrl" alt="Jérémy Richard" />
-        <AvatarFallback>RJ</AvatarFallback>
+        <AvatarImage v-if="!anonymous" :src="avatarUrl" alt="Jérémy Richard" />
+        <AvatarFallback>{{ anonymous ? '?' : 'RJ' }}</AvatarFallback>
       </Avatar>
-      <h1>RICHARD <span>Jérémy</span></h1>
+      <h1 v-if="anonymous">{{ t('cv.anonymousName') }}</h1>
+      <h1 v-else>RICHARD <span>Jérémy</span></h1>
     </header>
 
     <div class="cv-body">
@@ -174,13 +181,13 @@ const skillDomains: { key: string; skills: { label?: string; tKey?: string; fav?
           <p v-for="(p, i) in about" :key="i" class="about-p">{{ rt(p) }}</p>
         </section>
 
-        <section>
+        <section v-if="!anonymous">
           <h2 class="sec"><Icon name="contact" />/contact</h2>
           <div class="line"><Icon name="mail" /><span>{{ contact.email }}</span></div>
           <div class="line"><Icon name="phone" /><span>{{ contact.phone }}</span></div>
         </section>
 
-        <section>
+        <section v-if="!anonymous">
           <h2 class="sec"><Icon name="dots" />/more</h2>
           <a v-for="(m, i) in more" :key="i" class="line" :href="m.href" target="_blank" rel="noopener">
             <IconRootme v-if="m.svg === 'rootme'" class="ic ic-brand" />
