@@ -68,6 +68,8 @@
   "cv": {
     "exportPdf": "Exporter en PDF",
     "a4Preview": "Aperçu A4",
+    "anonymize": "Anonymiser",
+    "anonymousName": "Candidat",
     "about": [
       "Passionné par la science et éternel autodidacte, j'ai suivi un cursus d'ingénieur en cybersécurité tout en créant une micro-entreprise de développement web en parallèle.",
       "Aujourd'hui, j'allie une posture DevSecOps au travail à une veille technique active via la maintenance de mon Homelab. Ce triptyque (Code, Sécurité, Hardware) me permet de développer une vision holistique des systèmes informatiques modernes, et surtout assouvir ma soif d'apprendre et de construire.",
