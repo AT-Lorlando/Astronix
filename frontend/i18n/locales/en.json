@@ -70,6 +70,8 @@
     "subtitle": "What colleagues and collaborators say about my work.",
     "empty": "No recommendations yet. Be the first!",
     "loadError": "Could not load recommendations.",
+    "readMore": "Read more",
+    "readLess": "Read less",
     "formTitle": "Leave a recommendation",
     "formSubtitle": "Your message will be reviewed before being published.",
     "name": "Name",

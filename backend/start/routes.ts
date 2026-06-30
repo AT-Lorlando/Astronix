@@ -62,6 +62,8 @@ router
         router.post('/messages/:id/delete', [AdminMessagesController, 'destroy'])
 
         router.get('/recommendations', [AdminRecommendationsController, 'index'])
+        router.get('/recommendations/:id/edit', [AdminRecommendationsController, 'edit'])
+        router.post('/recommendations/:id/update', [AdminRecommendationsController, 'update'])
         router.post('/recommendations/:id/approve', [AdminRecommendationsController, 'approve'])
         router.post('/recommendations/:id/unapprove', [AdminRecommendationsController, 'unapprove'])
         router.post('/recommendations/:id/delete', [AdminRecommendationsController, 'destroy'])

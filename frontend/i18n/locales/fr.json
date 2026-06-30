@@ -70,6 +70,8 @@
     "subtitle": "Ce que des collègues et collaborateurs disent de mon travail.",
     "empty": "Aucune recommandation pour le moment. Soyez le premier !",
     "loadError": "Impossible de charger les recommandations.",
+    "readMore": "Lire plus",
+    "readLess": "Lire moins",
     "formTitle": "Laisser une recommandation",
     "formSubtitle": "Votre message sera relu avant d'être publié.",
     "name": "Nom",
