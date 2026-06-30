@@ -22,6 +22,9 @@ const { t } = useI18n()
         <NuxtLink to="/cv">{{ t('nav.cv') }}</NuxtLink>
       </Button>
       <Button variant="ghost" size="sm" as-child>
+        <NuxtLink to="/recommendations">{{ t('nav.recommendations') }}</NuxtLink>
+      </Button>
+      <Button variant="ghost" size="sm" as-child>
         <NuxtLink to="/contact">{{ t('nav.contact') }}</NuxtLink>
       </Button>
       <Button variant="ghost" size="icon" as-child>

@@ -41,3 +41,6 @@ export class RateLimiter {
 
 // Shared singleton for the contact endpoint: 3 requests / minute per IP.
 export const contactRateLimiter = new RateLimiter({ limit: 3, windowMs: 60_000 })
+
+// Shared singleton for the recommendation endpoint: 3 requests / minute per IP.
+export const recommendationRateLimiter = new RateLimiter({ limit: 3, windowMs: 60_000 })

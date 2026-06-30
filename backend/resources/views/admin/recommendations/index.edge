@@ -1,0 +1,72 @@
+@component('components/admin_layout', { title: 'Recommandations — Admin' })
+  <div class="wrap">
+    <header class="bar">
+      <div class="brand">
+        <span class="kicker">Astronix · admin</span>
+        <h1>Recommandations</h1>
+        @if(pendingCount > 0)
+          <span class="badge"><span class="dot"></span> {{ pendingCount }} en attente</span>
+        @end
+      </div>
+      <div class="nav-actions">
+        <a href="/admin" class="btn btn-sm btn-ghost">Messages</a>
+        <form method="POST" action="/admin/logout" class="inline">
+          <button type="submit" class="btn btn-sm btn-ghost">Déconnexion</button>
+        </form>
+      </div>
+    </header>
+
+    @if(recommendations.length === 0)
+      <div class="empty">
+        <p class="mono" style="font-size: 1.5rem; margin-bottom: 0.5rem;">∅</p>
+        <p>Aucune recommandation pour l'instant.</p>
+      </div>
+    @else
+      <div class="list">
+        @each(reco in recommendations)
+          <div class="card {{ reco.approved ? '' : 'pending' }}">
+            <dl class="meta">
+              <dt>De</dt>
+              <dd>{{ reco.name }}</dd>
+              <dt>Contact</dt>
+              <dd class="mono">{{ reco.contact }}</dd>
+              <dt>Reçu</dt>
+              <dd class="mono">{{ reco.createdAt.toFormat('dd/MM/yyyy à HH:mm') }}</dd>
+              <dt>Statut</dt>
+              <dd>
+                @if(reco.approved)
+                  <span class="badge neutral">Validée</span>
+                @else
+                  <span class="badge"><span class="dot"></span> En attente</span>
+                @end
+              </dd>
+            </dl>
+
+            <div class="msg-body">{{ reco.content }}</div>
+
+            <div class="actions">
+              @if(reco.approved)
+                <form method="POST" action="/admin/recommendations/{{ reco.id }}/unapprove" class="inline">
+                  <button type="submit" class="btn">Dévalider</button>
+                </form>
+              @else
+                <form method="POST" action="/admin/recommendations/{{ reco.id }}/approve" class="inline">
+                  <button type="submit" class="btn btn-primary">Valider</button>
+                </form>
+              @end
+
+              <form
+                method="POST"
+                action="/admin/recommendations/{{ reco.id }}/delete"
+                class="inline"
+                onsubmit="return confirm('Supprimer cette recommandation ?')"
+              >
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+              </form>
+            </div>
+          </div>
+        @end
+      </div>
+    @end
+  </div>
+@end

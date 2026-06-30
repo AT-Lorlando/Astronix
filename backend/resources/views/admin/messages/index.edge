@@ -8,9 +8,12 @@
           <span class="badge"><span class="dot"></span> {{ unreadCount }} non lu{{ unreadCount > 1 ? 's' : '' }}</span>
         @end
       </div>
-      <form method="POST" action="/admin/logout" class="inline">
-        <button type="submit" class="btn btn-sm btn-ghost">Déconnexion</button>
-      </form>
+      <div class="nav-actions">
+        <a href="/admin/recommendations" class="btn btn-sm btn-ghost">Recommandations</a>
+        <form method="POST" action="/admin/logout" class="inline">
+          <button type="submit" class="btn btn-sm btn-ghost">Déconnexion</button>
+        </form>
+      </div>
     </header>
 
     @if(messages.length === 0)
