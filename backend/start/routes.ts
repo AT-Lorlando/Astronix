@@ -12,8 +12,10 @@ import { middleware } from './kernel.js'
 
 const AuthController = () => import('#controllers/auth_controller')
 const ContactController = () => import('#controllers/contact_controller')
+const RecommendationsController = () => import('#controllers/recommendations_controller')
 const AdminSessionController = () => import('#controllers/admin/session_controller')
 const AdminMessagesController = () => import('#controllers/admin/messages_controller')
+const AdminRecommendationsController = () => import('#controllers/admin/recommendations_controller')
 
 router.get('/', async () => {
   return {
@@ -34,6 +36,10 @@ router
 
     // Public contact form (no auth)
     router.post('/contact', [ContactController, 'store'])
+
+    // Public recommendations: list approved ones, submit a new one (no auth)
+    router.get('/recommendations', [RecommendationsController, 'index'])
+    router.post('/recommendations', [RecommendationsController, 'store'])
   })
   .use(middleware.forceJson())
 
@@ -54,6 +60,11 @@ router
         router.post('/messages/:id/read', [AdminMessagesController, 'markRead'])
         router.post('/messages/:id/unread', [AdminMessagesController, 'markUnread'])
         router.post('/messages/:id/delete', [AdminMessagesController, 'destroy'])
+
+        router.get('/recommendations', [AdminRecommendationsController, 'index'])
+        router.post('/recommendations/:id/approve', [AdminRecommendationsController, 'approve'])
+        router.post('/recommendations/:id/unapprove', [AdminRecommendationsController, 'unapprove'])
+        router.post('/recommendations/:id/delete', [AdminRecommendationsController, 'destroy'])
       })
       .use(middleware.auth())
   })

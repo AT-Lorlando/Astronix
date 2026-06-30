@@ -5,7 +5,7 @@
     "loading": "Chargement...",
     "email": "E-mail"
   },
-  "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
+  "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "recommendations": "Recommandations", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
   "hero": {
     "positioning": "Ingénieur cyber et full-stack. Je conçois des produits pour me faciliter la vie, en local, sans cloud, avec de l'IA.",
     "statusLine": "> Cherche l'alliance parfaite entre etre stimulé, utile, et valorisé",
@@ -63,6 +63,28 @@
       "name": "Indiquez votre nom (2 caractères min).",
       "email": "Indiquez un email valide.",
       "message": "Indiquez un message (10 caractères min)."
+    }
+  },
+  "recommendations": {
+    "title": "Recommandations",
+    "subtitle": "Ce que des collègues et collaborateurs disent de mon travail.",
+    "empty": "Aucune recommandation pour le moment. Soyez le premier !",
+    "loadError": "Impossible de charger les recommandations.",
+    "formTitle": "Laisser une recommandation",
+    "formSubtitle": "Votre message sera relu avant d'être publié.",
+    "name": "Nom",
+    "contact": "Moyen de contact",
+    "contactHint": "Email, LinkedIn, téléphone… (visible par moi uniquement, jamais publié)",
+    "content": "Votre recommandation",
+    "submit": "Envoyer",
+    "submitting": "Envoi...",
+    "success": "Merci ! Votre recommandation a été envoyée et sera publiée après validation.",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "rateLimited": "Trop de tentatives. Veuillez patienter un instant.",
+    "errors": {
+      "name": "Indiquez votre nom (2 caractères min).",
+      "contact": "Indiquez un moyen de contact (2 caractères min).",
+      "content": "Indiquez votre recommandation (10 caractères min)."
     }
   },
   "cv": {
