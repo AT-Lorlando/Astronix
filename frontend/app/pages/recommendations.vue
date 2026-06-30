@@ -26,6 +26,14 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString(locale.value, { year: 'numeric', month: 'long' })
 }
 
+// "Read more": clamp long recommendations until the user expands them.
+const READ_MORE_THRESHOLD = 280
+const expanded = ref(new Set<number>())
+function toggleExpanded(id: number) {
+  if (expanded.value.has(id)) expanded.value.delete(id)
+  else expanded.value.add(id)
+}
+
 const status = ref<'idle' | 'success' | 'error' | 'rateLimited'>('idle')
 const submitting = ref(false)
 
@@ -59,7 +67,7 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-2xl px-6 pt-16 pb-8">
+  <div class="mx-auto max-w-5xl px-6 pt-16 pb-8">
     <h1 class="mb-2 text-3xl font-bold tracking-tight">{{ t('recommendations.title') }}</h1>
     <p class="mb-10 text-muted-foreground">{{ t('recommendations.subtitle') }}</p>
 
@@ -70,13 +78,24 @@ const onSubmit = handleSubmit(async (values) => {
     <p v-else-if="recommendations.length === 0" class="mb-12 text-muted-foreground">
       {{ t('recommendations.empty') }}
     </p>
-    <ul v-else class="mb-14 space-y-4">
+    <ul v-else class="mb-14 grid grid-cols-1 items-start gap-4 md:grid-cols-2">
       <li
         v-for="reco in recommendations"
         :key="reco.id"
         class="rounded-lg border bg-card p-5"
       >
-        <p class="whitespace-pre-wrap leading-relaxed">{{ reco.content }}</p>
+        <p
+          class="whitespace-pre-wrap leading-relaxed"
+          :class="{ 'line-clamp-6': !expanded.has(reco.id) && reco.content.length > READ_MORE_THRESHOLD }"
+        >{{ reco.content }}</p>
+        <button
+          v-if="reco.content.length > READ_MORE_THRESHOLD"
+          type="button"
+          class="mt-2 text-sm font-medium text-primary hover:underline"
+          @click="toggleExpanded(reco.id)"
+        >
+          {{ expanded.has(reco.id) ? t('recommendations.readLess') : t('recommendations.readMore') }}
+        </button>
         <p class="mt-3 font-mono text-sm text-muted-foreground">
           — {{ reco.name }} · {{ formatDate(reco.createdAt) }}
         </p>
@@ -84,7 +103,7 @@ const onSubmit = handleSubmit(async (values) => {
     </ul>
 
     <!-- Formulaire de soumission -->
-    <div class="border-t pt-10">
+    <div class="mx-auto max-w-2xl border-t pt-10">
       <h2 class="mb-1 text-xl font-semibold tracking-tight">{{ t('recommendations.formTitle') }}</h2>
       <p class="mb-8 text-sm text-muted-foreground">{{ t('recommendations.formSubtitle') }}</p>
 

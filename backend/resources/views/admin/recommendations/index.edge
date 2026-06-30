@@ -45,6 +45,8 @@
             <div class="msg-body">{{ reco.content }}</div>
 
             <div class="actions">
+              <a href="/admin/recommendations/{{ reco.id }}/edit" class="btn">Éditer</a>
+
               @if(reco.approved)
                 <form method="POST" action="/admin/recommendations/{{ reco.id }}/unapprove" class="inline">
                   <button type="submit" class="btn">Dévalider</button>

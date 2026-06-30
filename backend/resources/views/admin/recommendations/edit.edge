@@ -1,0 +1,40 @@
+@component('components/admin_layout', { title: 'Éditer une recommandation — Admin' })
+  <div class="wrap">
+    <header class="bar">
+      <div class="brand">
+        <span class="kicker">Astronix · admin</span>
+        <h1>Éditer la recommandation</h1>
+      </div>
+      <a href="/admin/recommendations" class="btn btn-sm btn-ghost">← Retour</a>
+    </header>
+
+    <div class="card">
+      <form method="POST" action="/admin/recommendations/{{ recommendation.id }}/update">
+        <div class="field">
+          <label for="name">Nom</label>
+          <input type="text" id="name" name="name" value="{{ recommendation.name }}" required />
+        </div>
+
+        <div class="field">
+          <label for="contact">Contact</label>
+          <input type="text" id="contact" name="contact" value="{{ recommendation.contact }}" required />
+        </div>
+
+        <div class="field">
+          <label for="createdAt">Date</label>
+          <input type="datetime-local" id="createdAt" name="createdAt" value="{{ createdAtLocal }}" required />
+        </div>
+
+        <div class="field">
+          <label for="content">Contenu</label>
+          <textarea id="content" name="content" rows="10" required>{{ recommendation.content }}</textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <a href="/admin/recommendations" class="btn">Annuler</a>
+        </div>
+      </form>
+    </div>
+  </div>
+@end
