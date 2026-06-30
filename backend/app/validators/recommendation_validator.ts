@@ -7,7 +7,7 @@ import vine from '@vinejs/vine'
 export const recommendationValidator = vine.compile(
   vine.object({
     name: vine.string().trim().minLength(2).maxLength(100),
-    content: vine.string().trim().minLength(10).maxLength(2000),
+    content: vine.string().trim().minLength(10).maxLength(6000),
     contact: vine.string().trim().minLength(2).maxLength(200),
     website: vine.string().optional(),
   })
