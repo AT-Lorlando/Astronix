@@ -10,13 +10,18 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <Card :class="['h-full', project.featured ? 'border-primary/50' : '']">
+  <Card
+    :class="[
+      'group h-full transition-all duration-200 hover:-translate-y-1 hover:border-primary/50',
+      project.featured ? 'border-primary/50' : '',
+    ]"
+  >
     <CardHeader>
       <div class="flex items-center gap-3">
         <CardTitle>{{ project.name }}</CardTitle>
         <Badge v-if="project.featured" class="font-mono text-xs">{{ t('projects.featured') }}</Badge>
       </div>
-      <CardDescription class="line-clamp-2 min-h-[2.5rem]">{{ t(`projects.${project.id}.tagline`) }}</CardDescription>
+      <CardDescription class="line-clamp-2">{{ t(`projects.${project.id}.tagline`) }}</CardDescription>
     </CardHeader>
     <CardContent class="flex flex-1 flex-col gap-4">
       <p class="line-clamp-3 text-sm text-muted-foreground">{{ t(`projects.${project.id}.pitch`) }}</p>
