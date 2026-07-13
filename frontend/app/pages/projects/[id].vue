@@ -20,8 +20,8 @@ const features = computed(() => tm(`projects.${id.value}.features`) as MessageFu
 </script>
 
 <template>
-  <article v-if="project" class="mx-auto max-w-3xl px-6 pt-16 pb-8">
-    <NuxtLink to="/projects" class="mb-8 inline-flex items-center font-mono text-sm text-muted-foreground hover:text-primary">
+  <PageSection v-if="project" width="prose" as="article">
+    <NuxtLink to="/projects" class="mb-8 inline-flex items-center font-mono text-sm text-muted-foreground transition-colors hover:text-primary">
       <Icon name="lucide:arrow-left" class="mr-2 h-4 w-4" />{{ t('projects.back') }}
     </NuxtLink>
 
@@ -66,5 +66,5 @@ const features = computed(() => tm(`projects.${id.value}.features`) as MessageFu
         <Icon name="lucide:github" class="mr-2 h-4 w-4" />{{ t('projects.viewGithub') }}
       </a>
     </Button>
-  </article>
+  </PageSection>
 </template>

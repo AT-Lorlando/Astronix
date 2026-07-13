@@ -67,9 +67,8 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-5xl px-6 pt-16 pb-8">
-    <h1 class="mb-2 text-3xl font-bold tracking-tight">{{ t('recommendations.title') }}</h1>
-    <p class="mb-10 text-muted-foreground">{{ t('recommendations.subtitle') }}</p>
+  <PageSection width="list">
+    <PageHeader :title="t('recommendations.title')" :subtitle="t('recommendations.subtitle')" />
 
     <!-- Liste des recommandations approuvées -->
     <p v-if="loadError" class="mb-6 rounded-md bg-destructive/10 p-3 text-sm text-destructive" role="alert">
@@ -171,5 +170,5 @@ const onSubmit = handleSubmit(async (values) => {
         </Button>
       </form>
     </div>
-  </div>
+  </PageSection>
 </template>

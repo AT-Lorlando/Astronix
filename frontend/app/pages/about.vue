@@ -19,7 +19,7 @@ useHead(() => ({ title: doc.value?.title ?? t('about.title') }))
 </script>
 
 <template>
-  <div class="mx-auto max-w-3xl px-6 pt-16 pb-8">
+  <PageSection width="prose">
     <article
       v-if="doc"
       class="prose prose-invert max-w-none prose-headings:text-foreground prose-headings:tracking-tight prose-a:text-primary"
@@ -27,5 +27,5 @@ useHead(() => ({ title: doc.value?.title ?? t('about.title') }))
       <ContentRenderer :value="doc" />
     </article>
     <p v-else class="text-muted-foreground">{{ t('about.title') }}</p>
-  </div>
+  </PageSection>
 </template>

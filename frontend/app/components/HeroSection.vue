@@ -6,7 +6,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <section class="mx-auto max-w-5xl px-6 pt-24 pb-16">
+  <PageSection width="list" as="section" class="!pt-16 sm:!pt-24">
     <p class="mb-6 font-mono text-sm text-primary">{{ t('hero.statusLine') }}</p>
     <h1 class="mb-6 text-4xl font-bold tracking-tight sm:text-6xl">{{ t('app.name') }}</h1>
     <p class="mb-10 max-w-2xl text-lg text-muted-foreground sm:text-xl">
@@ -25,5 +25,5 @@ const { t } = useI18n()
         </a>
       </Button>
     </div>
-  </section>
+  </PageSection>
 </template>

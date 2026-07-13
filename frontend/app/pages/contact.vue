@@ -43,9 +43,8 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-xl px-6 pt-16 pb-8">
-    <h1 class="mb-2 text-3xl font-bold tracking-tight">{{ t('contact.title') }}</h1>
-    <p class="mb-10 text-muted-foreground">{{ t('contact.subtitle') }}</p>
+  <PageSection width="form">
+    <PageHeader :title="t('contact.title')" :subtitle="t('contact.subtitle')" />
 
     <p
       v-if="status === 'success'"
@@ -87,7 +86,7 @@ const onSubmit = handleSubmit(async (values) => {
         <FormItem>
           <FormLabel>{{ t('contact.message') }}</FormLabel>
           <FormControl>
-            <Textarea rows="10" class="min-h-48" v-bind="componentField" />
+            <Textarea rows="8" class="min-h-40" v-bind="componentField" />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -109,5 +108,5 @@ const onSubmit = handleSubmit(async (values) => {
         {{ submitting ? t('contact.submitting') : t('contact.submit') }}
       </Button>
     </form>
-  </div>
+  </PageSection>
 </template>
