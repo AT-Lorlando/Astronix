@@ -5,7 +5,7 @@
     "loading": "Chargement...",
     "email": "E-mail"
   },
-  "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "recommendations": "Recommandations", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}" },
+  "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "recommendations": "Recommandations", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}", "menu": "Menu" },
   "hero": {
     "positioning": "Ingénieur cyber et full-stack. Je conçois des produits pour me faciliter la vie, en local, sans cloud, avec de l'IA.",
     "statusLine": "> Cherche l'alliance parfaite entre etre stimulé, utile, et valorisé",
