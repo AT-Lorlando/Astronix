@@ -408,6 +408,15 @@ a.line:hover { color: var(--blue); }
 @media (max-width: 720px) {
   .cv-body { grid-template-columns: 1fr; gap: var(--gap); }
   .cv-head h1 { font-size: 26px; }
+  /* Barre d'outils : passe à la ligne au lieu de déborder à droite. */
+  .toolbar { flex-wrap: wrap; justify-content: flex-start; padding: 0 12px; }
+  /* Marge latérale pour que la carte ne colle pas aux bords. */
+  .cv-page { padding: 0 12px; }
+}
+/* Aperçu A4 (794px) plus large que l'écran : on le fait défiler dans sa zone,
+   sans provoquer de scroll horizontal du body. */
+@media (max-width: 840px) {
+  .cv-page { overflow-x: auto; }
 }
 
 /* MODE A4 FIXE (aperçu écran) — 210×297mm ≈ 794×1123px @96dpi.
@@ -432,11 +441,14 @@ a.line:hover { color: var(--blue); }
 
   /* Tout le CV tient sur une seule page A4. On redéfinit l'échelle typo
      (↑/↓ ces 7 valeurs pour agrandir/réduire globalement) + l'espacement. */
-  .cv {
+  .cv,
+  .cv.a4 {
     --fs-name: 21px; --fs-title: 11px; --fs-text: 9.6px;
     --fs-body: 9.2px; --fs-job: 11px; --fs-sub: 9.2px; --fs-meta: 8.8px;
     width: 210mm;
     height: 297mm;
+    min-height: 0;
+    max-width: none;
     margin: 0;
     border: 0;
     border-radius: 0;
@@ -447,11 +459,13 @@ a.line:hover { color: var(--blue); }
   }
 
   /* En-tête */
-  .cv-head { padding: 5mm 11mm 3.5mm; gap: 14px; }
+  .cv-head,
+  .cv.a4 .cv-head { padding: 5mm 11mm 3.5mm; gap: 14px; }
   .avatar { width: 48px; height: 48px; font-size: 16px; }
 
   /* Corps : colonnes serrées, sections rapprochées */
-  .cv-body { grid-template-columns: 54mm 1fr; gap: 6mm; padding: 3.5mm 11mm 5mm; }
+  .cv-body,
+  .cv.a4 .cv-body { grid-template-columns: 54mm 1fr; gap: 6mm; padding: 3.5mm 11mm 5mm; }
   .col-left, .col-right { gap: 10px; }
   .sec { margin-bottom: 5px; padding-bottom: 3px; gap: 6px; }
 
@@ -463,7 +477,8 @@ a.line:hover { color: var(--blue); }
   .proj-grid { gap: 6px; }
 
   /* Expériences */
-  .card { padding: 8px 10px; margin-bottom: 6px; }
+  .card,
+  .cv.a4 .card { padding: 8px 10px; margin-bottom: 6px; }
   .card-top { margin-bottom: 6px; }
   .date { padding: 2px 7px; }
   .body { margin-bottom: 3px; }
