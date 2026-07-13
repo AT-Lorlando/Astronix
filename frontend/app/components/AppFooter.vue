@@ -5,10 +5,12 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <footer class="flex h-16 shrink-0 items-center border-t px-6">
-    <div class="mx-auto flex w-full max-w-5xl items-center justify-between gap-4">
-      <p class="min-w-0 truncate font-mono text-xs text-muted-foreground">{{ t('footer.madeWith') }}</p>
-      <div class="flex shrink-0 items-center gap-6 text-sm">
+  <footer class="shrink-0 border-t">
+    <div
+      class="mx-auto flex w-full max-w-5xl flex-col items-center gap-2 px-6 py-4 text-center sm:flex-row sm:justify-between sm:gap-4 sm:px-8 sm:text-left"
+    >
+      <p class="font-mono text-xs text-muted-foreground">{{ t('footer.madeWith') }}</p>
+      <div class="flex items-center gap-6 text-sm">
         <a
           :href="site.github"
           target="_blank"
