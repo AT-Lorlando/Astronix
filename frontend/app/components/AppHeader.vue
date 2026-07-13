@@ -50,7 +50,7 @@ watch(() => route.path, () => { open.value = false })
               <Icon name="lucide:menu" class="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" class="w-72">
+          <SheetContent side="right" class="w-72" :aria-describedby="undefined">
             <SheetTitle class="font-mono text-sm">{{ t('app.name') }}</SheetTitle>
             <nav class="mt-8 flex flex-col gap-1">
               <SheetClose v-for="l in links" :key="l.to" as-child>

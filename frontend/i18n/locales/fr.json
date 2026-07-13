@@ -1,7 +1,6 @@
 {
   "app": { "name": "Jérémy RICHARD", "title": "Jérémy RICHARD", "subtitle": "Ingénieur cyber & full-stack" },
   "common": {
-    "home": "Accueil",
     "loading": "Chargement...",
     "email": "E-mail"
   },
