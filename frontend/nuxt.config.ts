@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   ],
 
   app: {
-    pageTransition: false,
+    pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: false,
     head: {
       htmlAttrs: {
