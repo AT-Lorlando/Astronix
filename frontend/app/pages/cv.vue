@@ -436,7 +436,9 @@ a.line:hover { color: var(--blue); }
  *  (le masquage du header/footer du layout est dans le bloc <style> global)
  * ════════════════════════════════════════════════════════════════════════ */
 @media print {
-  :global(html), :global(body) { margin: 0; padding: 0; background: #0d1117; }
+  /* height + overflow hidden : clippe DUR à une page — aucun arrondi sub-pixel
+     (zoom, DPI, moteur) ne peut plus créer une 2e page blanche. */
+  :global(html), :global(body) { margin: 0; padding: 0; background: #0d1117; height: 297mm; overflow: hidden; }
   .toolbar { display: none !important; }
 
   /* Tout le CV tient sur une seule page A4. On redéfinit l'échelle typo
@@ -446,10 +448,14 @@ a.line:hover { color: var(--blue); }
     --fs-name: 21px; --fs-title: 11px; --fs-text: 9.6px;
     --fs-body: 9.2px; --fs-job: 11px; --fs-sub: 9.2px; --fs-meta: 8.8px;
     width: 210mm;
-    height: 297mm;
+    /* 0.5mm sous la page : marge de tolérance aux arrondis (le fond de page
+       est déjà #0d1117, le liseré est invisible). */
+    height: 296.5mm;
     min-height: 0;
     max-width: none;
-    margin: 0;
+    /* auto : si le papier/dialogue laisse du jeu en largeur, il se répartit
+       symétriquement au lieu d'apparaître d'un seul côté. */
+    margin: 0 auto;
     border: 0;
     border-radius: 0;
     box-shadow: none;
