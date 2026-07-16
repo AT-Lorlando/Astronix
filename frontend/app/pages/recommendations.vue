@@ -6,6 +6,7 @@ import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Textarea } from '~/components/ui/textarea'
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '~/components/ui/dialog'
 
 interface Recommendation {
   id: number
@@ -26,13 +27,10 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString(locale.value, { year: 'numeric', month: 'long' })
 }
 
-// "Read more": clamp long recommendations until the user expands them.
-const READ_MORE_THRESHOLD = 280
-const expanded = ref(new Set<number>())
-function toggleExpanded(id: number) {
-  if (expanded.value.has(id)) expanded.value.delete(id)
-  else expanded.value.add(id)
-}
+// Les cartes restent compactes (clamp) ; les lettres longues s'ouvrent dans
+// une modale de lecture au lieu de déplier une carte géante dans la grille.
+const READ_LETTER_THRESHOLD = 280
+const openLetter = ref<Recommendation | null>(null)
 
 const status = ref<'idle' | 'success' | 'error' | 'rateLimited'>('idle')
 const submitting = ref(false)
@@ -77,29 +75,41 @@ const onSubmit = handleSubmit(async (values) => {
     <p v-else-if="recommendations.length === 0" class="mb-12 text-muted-foreground">
       {{ t('recommendations.empty') }}
     </p>
-    <ul v-else class="mb-14 grid grid-cols-1 items-start gap-4 md:grid-cols-2">
+    <ul v-else class="mb-14 grid grid-cols-1 gap-4 md:grid-cols-2">
       <li
         v-for="reco in recommendations"
         :key="reco.id"
-        class="rounded-lg border bg-card p-5"
+        class="flex flex-col rounded-lg border bg-card p-5 transition-colors hover:border-primary/50"
       >
-        <p
-          class="whitespace-pre-wrap leading-relaxed"
-          :class="{ 'line-clamp-6': !expanded.has(reco.id) && reco.content.length > READ_MORE_THRESHOLD }"
-        >{{ reco.content }}</p>
-        <button
-          v-if="reco.content.length > READ_MORE_THRESHOLD"
-          type="button"
-          class="mt-2 text-sm font-medium text-primary hover:underline"
-          @click="toggleExpanded(reco.id)"
-        >
-          {{ expanded.has(reco.id) ? t('recommendations.readLess') : t('recommendations.readMore') }}
-        </button>
-        <p class="mt-3 font-mono text-sm text-muted-foreground">
-          — {{ reco.name }} · {{ formatDate(reco.createdAt) }}
-        </p>
+        <p class="line-clamp-6 whitespace-pre-wrap leading-relaxed">{{ reco.content }}</p>
+        <div class="mt-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1 pt-3">
+          <p class="min-w-0 font-mono text-sm text-muted-foreground">
+            — {{ reco.name }} · {{ formatDate(reco.createdAt) }}
+          </p>
+          <button
+            v-if="reco.content.length > READ_LETTER_THRESHOLD"
+            type="button"
+            class="shrink-0 text-sm font-medium text-primary hover:underline"
+            @click="openLetter = reco"
+          >
+            {{ t('recommendations.readLetter') }}
+          </button>
+        </div>
       </li>
     </ul>
+
+    <!-- Modale de lecture : la lettre entière, largeur lecture, scroll interne -->
+    <Dialog :open="!!openLetter" @update:open="(v) => { if (!v) openLetter = null }">
+      <DialogContent class="sm:max-w-2xl">
+        <DialogHeader>
+          <DialogTitle class="font-mono text-base">— {{ openLetter?.name }}</DialogTitle>
+          <DialogDescription>{{ openLetter ? formatDate(openLetter.createdAt) : '' }}</DialogDescription>
+        </DialogHeader>
+        <div class="-mr-2 max-h-[65vh] overflow-y-auto pr-2">
+          <p class="whitespace-pre-wrap leading-relaxed">{{ openLetter?.content }}</p>
+        </div>
+      </DialogContent>
+    </Dialog>
 
     <!-- Formulaire de soumission -->
     <div class="mx-auto max-w-2xl border-t pt-10">
