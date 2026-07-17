@@ -464,14 +464,15 @@ a.line:hover { color: var(--blue); }
     print-color-adjust: exact;
   }
 
-  /* En-tête */
+  /* En-tête — gouttières latérales 5mm : même proportion que l'aperçu écran
+     (11mm donnait un cadre vide très visible autour du contenu) */
   .cv-head,
-  .cv.a4 .cv-head { padding: 5mm 11mm 3.5mm; gap: 14px; }
+  .cv.a4 .cv-head { padding: 5mm 5mm 3.5mm; gap: 14px; }
   .avatar { width: 48px; height: 48px; font-size: 16px; }
 
   /* Corps : colonnes serrées, sections rapprochées */
   .cv-body,
-  .cv.a4 .cv-body { grid-template-columns: 54mm 1fr; gap: 6mm; padding: 3.5mm 11mm 5mm; }
+  .cv.a4 .cv-body { grid-template-columns: 54mm 1fr; gap: 6mm; padding: 3.5mm 5mm 5mm; }
   .col-left, .col-right { gap: 10px; }
   .sec { margin-bottom: 5px; padding-bottom: 3px; gap: 6px; }
 
