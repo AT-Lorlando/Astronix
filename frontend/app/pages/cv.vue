@@ -17,6 +17,16 @@ function exportPDF() {
   window.print()
 }
 
+// Ctrl+P direct (sans passer par le bouton) : force le layout A4 avant le
+// rendu d'impression. Le classList.add synchrone garantit que la classe est
+// posée avant le snapshot, sans attendre le patch asynchrone de Vue.
+function forceA4BeforePrint() {
+  a4Mode.value = true
+  document.querySelector('.cv')?.classList.add('a4')
+}
+onMounted(() => window.addEventListener('beforeprint', forceA4BeforePrint))
+onUnmounted(() => window.removeEventListener('beforeprint', forceA4BeforePrint))
+
 /* Petites icônes outline génériques (style lucide) — les marques Root-Me / HTB
    utilisent les composants <IconRootme /> / <IconHtb /> auto-importés. */
 const PATHS: Record<string, ReturnType<typeof h>[]> = {
@@ -419,17 +429,43 @@ a.line:hover { color: var(--blue); }
   .cv-page { overflow-x: auto; }
 }
 
-/* MODE A4 FIXE (aperçu écran) — 210×297mm ≈ 794×1123px @96dpi.
-   On ne redéfinit que l'échelle typo + quelques marges ; aucune taille en dur. */
+/* ═══ MODE A4 (aperçu écran) — WYSIWYG STRICT ══════════════════════════════
+   Une vraie page 210×297mm (= 794×1123px @96dpi, donc 1px écran = 1px print).
+   ⚠ MIROIR : chaque valeur ci-dessous DOIT être identique à celle du bloc
+   @media print plus bas (qui la répète pour le cas sans classe .a4).
+   L'échelle typo (k=1.12 vs l'ancienne échelle print) est calibrée pour que
+   le contenu REMPLISSE la page dans les deux locales sans déborder. */
 .cv.a4 {
-  --fs-name: 26px; --fs-title: 13px; --fs-text: 11px;
-  --fs-body: 10.5px; --fs-job: 11.5px; --fs-sub: 10px; --fs-meta: 9.5px;
-  width: 794px; max-width: 794px; min-height: 1123px;
+  --fs-name: 23.5px; --fs-title: 12.3px; --fs-text: 10.8px;
+  --fs-body: 10.3px; --fs-job: 12.3px; --fs-sub: 10.3px; --fs-meta: 9.9px;
+  width: 210mm; max-width: 210mm; height: 297mm; min-height: 0;
+  line-height: 1.4;
   border-radius: 0; box-shadow: 0 0 0 1px #0003, 0 12px 40px #0006;
+  overflow: hidden;
 }
-.cv.a4 .cv-body { grid-template-columns: 230px 1fr; gap: 18px; padding: 14px 18px 18px; }
-.cv.a4 .cv-head { padding: 14px 18px; }
-.cv.a4 .card { padding: 11px 13px; margin-bottom: 9px; }
+.cv.a4 .cv-head { padding: 5mm 5mm 3.5mm; gap: 14px; }
+.cv.a4 .avatar { width: 48px; height: 48px; font-size: 16px; }
+.cv.a4 .cv-body { grid-template-columns: 54mm 1fr; gap: 6mm; padding: 3.5mm 5mm 5mm; }
+.cv.a4 .col-left, .cv.a4 .col-right { gap: 10px; }
+.cv.a4 .sec { margin-bottom: 5px; padding-bottom: 3px; gap: 6px; }
+.cv.a4 .about-p { margin-bottom: 4px; }
+.cv.a4 .plain { margin-bottom: 1px; }
+.cv.a4 .line { margin-bottom: 3px; gap: 7px; }
+.cv.a4 .proj { padding: 2px 8px; }
+.cv.a4 .proj-grid { gap: 6px; }
+.cv.a4 .card { padding: 8px 10px; margin-bottom: 6px; }
+.cv.a4 .card-top { margin-bottom: 6px; }
+.cv.a4 .date { padding: 2px 7px; }
+.cv.a4 .body { margin-bottom: 3px; }
+.cv.a4 .bullets { padding-left: 14px; }
+.cv.a4 .bullets li { margin-bottom: 1px; }
+.cv.a4 .tags { gap: 8px; margin-top: 6px; }
+.cv.a4 .edu { margin-bottom: 6px; }
+.cv.a4 .edu-date { padding: 3px 9px; }
+.cv.a4 .skill-group { margin-bottom: 5px; }
+.cv.a4 .skill-domain { margin-bottom: 3px; }
+.cv.a4 .skills { gap: 5px; }
+.cv.a4 .skill { padding: 2px 8px; }
 
 /* ════════════════════════════════════════════════════════════════════════
  *  IMPRESSION / EXPORT PDF — A4 exact, fond sombre conservé, texte vectoriel
@@ -441,12 +477,13 @@ a.line:hover { color: var(--blue); }
   :global(html), :global(body) { margin: 0; padding: 0; background: #0d1117; height: 297mm; overflow: hidden; }
   .toolbar { display: none !important; }
 
-  /* Tout le CV tient sur une seule page A4. On redéfinit l'échelle typo
-     (↑/↓ ces 7 valeurs pour agrandir/réduire globalement) + l'espacement. */
+  /* ⚠ MIROIR du bloc ".cv.a4" (aperçu écran) plus haut : mêmes valeurs, pour
+     que l'export soit STRICTEMENT identique à l'aperçu (WYSIWYG), y compris
+     via Ctrl+P sans la classe .a4 (d'où le sélecteur .cv seul). */
   .cv,
   .cv.a4 {
-    --fs-name: 21px; --fs-title: 11px; --fs-text: 9.6px;
-    --fs-body: 9.2px; --fs-job: 11px; --fs-sub: 9.2px; --fs-meta: 8.8px;
+    --fs-name: 23.5px; --fs-title: 12.3px; --fs-text: 10.8px;
+    --fs-body: 10.3px; --fs-job: 12.3px; --fs-sub: 10.3px; --fs-meta: 9.9px;
     width: 210mm;
     /* 0.5mm sous la page : marge de tolérance aux arrondis (le fond de page
        est déjà #0d1117, le liseré est invisible). */
