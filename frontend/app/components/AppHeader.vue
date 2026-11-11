@@ -27,7 +27,8 @@ watch(() => route.path, () => { open.value = false })
 <template>
   <header class="border-b">
     <div class="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
-      <NuxtLink to="/" class="font-mono text-sm font-semibold tracking-tight">
+      <NuxtLink to="/" class="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight">
+        <AstronixLogo class="h-7 w-7 text-foreground [--astronix-star:var(--primary)]" />
         {{ t('app.name') }}
       </NuxtLink>
 
@@ -54,7 +55,10 @@ watch(() => route.path, () => { open.value = false })
             </Button>
           </SheetTrigger>
           <SheetContent side="right" class="w-72" :aria-describedby="undefined">
-            <SheetTitle class="font-mono text-sm">{{ t('app.name') }}</SheetTitle>
+            <SheetTitle class="flex items-center gap-2 font-mono text-sm">
+              <AstronixLogo class="h-6 w-6 text-foreground [--astronix-star:var(--primary)]" />
+              {{ t('app.name') }}
+            </SheetTitle>
             <nav class="mt-8 flex flex-col gap-1">
               <SheetClose v-for="l in links" :key="l.to" as-child>
                 <NuxtLink
