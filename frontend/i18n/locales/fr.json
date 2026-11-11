@@ -54,22 +54,22 @@
     "featured": "Projet phare",
     "aster": {
       "tagline": "Analyse de chemins d'attaque, en environnement airgap",
-      "pitch": "Aster ne liste pas des CVE par machine : il compose des enchaînements d'attaque. « Un attaquant non authentifié atteint le front, y obtient une RCE, rebondit vers le back qui parle aux données clientes. » Toute la chaîne, du scan à la restitution, sans rien installer sur les machines scannées.",
+      "pitch": "Ce n'est pas un simple matcher de CVE, mais un moteur qui compose des enchaînements d'attaque. « Un attaquant non authentifié atteint le front, y obtient une RCE, rebondit vers le back qui parle aux données clientes. » Toute la chaîne, du scan à la restitution, sans rien installer sur les machines scannées.",
       "features": ["Collecte sans agent : SBOM CycloneDX 1.6 et constats de conformité, livrés en un seul bundle", "Matching CVE multi-sources (OSV, NVD, CVE List V5) avec comparateurs de versions maison", "Moteur de chemins : huit sortes de pas, trois positions d'attaquant, coupe minimale et bottlenecks", "Résultat daté qui dit aussi ce qu'il ignore"]
     },
     "yui": {
       "tagline": "Assistant domotique vocal, piloté par LLM",
       "pitch": "Yui tourne 24h/24 et pilote l'appartement à la voix ou depuis son app : lumières, TV, musique, serrure, volets, minuteurs, arrosage. Le LLM ne sert qu'à router les intentions vers des outils, tout en ayant un contexte d'apprentissage, d'autonomie, de proactivité et même d'humour. Un ordre simple se joue en moins d'une demi-seconde.",
-      "features": ["Chaîne vocale : wake word, Whisper, XTTS, réponses lues au fil de l'eau", "Un serveur MCP par domaine (Hue, Nuki, Spotify, Chromecast, Somfy, Gmail…)", "Routage LLM entre un modèle local et le cloud selon la demande", "Scènes, automations et proactivité (réveil, départ, retour) avec app mobile"]
+      "features": ["Chaîne vocale : wake word, Whisper, XTTS", "Un serveur MCP par domaine (Hue, Nuki, Spotify, Chromecast, Somfy, Gmail…)", "Routage LLM entre un modèle local et le cloud selon la demande", "Scènes, automations et proactivité (réveil, départ, retour) avec app mobile"]
     },
     "koya": {
       "tagline": "Déploiement et supervision du homelab",
       "pitch": "Koya unifie toutes les configurations de mon homelab au même endroit : des routes nginx du reverse proxy sur un Pi au déploiement d'un process Node sur le serveur de déploiement, en passant par le monitoring des apps, des services et même du routeur, avec mon propre système de push-to-build/deploy. Un gain de temps et de légèreté significatif.",
-      "features": ["Pipeline de déploiement avec historique et sortie de chaque étape", "Push-to-deploy par webhook GitHub signé", "Gestion des hosts et des clés SSH", "Routes nginx lues et écrites depuis l'interface"]
+      "features": ["Pipeline de déploiement avec historique et sortie de chaque étape", "Push-to-deploy par webhook GitHub", "Gestion des hosts et des clés SSH", "Routes nginx lues et écrites depuis l'interface"]
     },
     "yoji": {
       "tagline": "Hub de notes, tâches et projets, + MCP",
-      "pitch": "Yoji remplace Obsidian et Linear : j'y mets mes notes, mes tâches et le suivi de mes projets, dans un vault Markdown versionné par Git. Claude y lit et y écrit via MCP, si bien qu'aucune session de travail ne repart de zéro.",
+      "pitch": "Yoji remplace Obsidian et Linear : j'y mets mes notes, mes tâches et le suivi de mes projets, dans un vault Markdown versionné par Git.",
       "features": ["Vault Git comme source de vérité, base de données comme simple index", "Synchronisation avec gestion des conflits et sauvegardes", "Une quarantaine d'outils MCP", "Web, Linux (Electron, y compris hors ligne) et Android"]
     }
   },

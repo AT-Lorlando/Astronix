@@ -54,22 +54,22 @@
     "featured": "Lead project",
     "aster": {
       "tagline": "Attack-path analysis for air-gapped environments",
-      "pitch": "Aster doesn't list CVEs per machine: it composes attack chains. \"An unauthenticated attacker reaches the front end, gets RCE there, pivots to the back end that talks to customer data.\" The whole chain, from scan to report, without installing anything on the scanned machines.",
+      "pitch": "It's not just a CVE matcher, but an engine that composes attack chains. \"An unauthenticated attacker reaches the front end, gets RCE there, pivots to the back end that talks to customer data.\" The whole chain, from scan to report, without installing anything on the scanned machines.",
       "features": ["Agentless collection: CycloneDX 1.6 SBOMs and compliance findings, shipped as one bundle", "Multi-source CVE matching (OSV, NVD, CVE List V5) with in-house version comparators", "Path engine: eight kinds of steps, three attacker positions, minimal cut and bottlenecks", "Dated results that also state what they don't know"]
     },
     "yui": {
       "tagline": "LLM-driven voice home assistant",
       "pitch": "Yui runs around the clock and controls the apartment by voice or from its app: lights, TV, music, lock, shutters, timers, watering. The LLM only routes intents to tools, while keeping a context of learning, autonomy, proactivity and even humor. A simple command plays out in under half a second.",
-      "features": ["Voice pipeline: wake word, Whisper, XTTS, replies spoken as they stream", "One MCP server per domain (Hue, Nuki, Spotify, Chromecast, Somfy, Gmail…)", "LLM routing between a local model and the cloud depending on the request", "Scenes, automations and proactivity (wake-up, leaving, coming home) with a mobile app"]
+      "features": ["Voice pipeline: wake word, Whisper, XTTS", "One MCP server per domain (Hue, Nuki, Spotify, Chromecast, Somfy, Gmail…)", "LLM routing between a local model and the cloud depending on the request", "Scenes, automations and proactivity (wake-up, leaving, coming home) with a mobile app"]
     },
     "koya": {
       "tagline": "Homelab deployment and monitoring",
       "pitch": "Koya brings every configuration of my homelab into one place: from the nginx routes of the reverse proxy on a Pi to deploying a Node process on the deployment server, through monitoring of apps, services and even the router, with my own push-to-build/deploy system. A significant gain in time and lightness.",
-      "features": ["Deployment pipeline with history and per-step output", "Push-to-deploy through a signed GitHub webhook", "Host and SSH key management", "Nginx routes read and written from the UI"]
+      "features": ["Deployment pipeline with history and per-step output", "Push-to-deploy through a GitHub webhook", "Host and SSH key management", "Nginx routes read and written from the UI"]
     },
     "yoji": {
       "tagline": "Notes, tasks and projects hub, + MCP",
-      "pitch": "Yoji replaces Obsidian and Linear: I keep my notes, tasks and project tracking in a Git-versioned Markdown vault. Claude reads and writes it over MCP, so no work session starts from scratch.",
+      "pitch": "Yoji replaces Obsidian and Linear: I keep my notes, tasks and project tracking in a Git-versioned Markdown vault.",
       "features": ["Git vault as the source of truth, database as a mere index", "Sync with conflict handling and backups", "About forty MCP tools", "Web, Linux (Electron, offline included) and Android"]
     }
   },
