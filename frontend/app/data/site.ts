@@ -2,7 +2,8 @@ export interface SiteProject {
   id: string
   name: string
   featured: boolean
-  repo: string
+  /** Repo public uniquement : null masque le bouton GitHub (repo privé). */
+  repo: string | null
   video: string | null
   stack: string[]
 }
@@ -19,10 +20,10 @@ export const site: SiteData = {
   email: 'jeremy.richard@astronix.fr',
   github: 'https://github.com/AT-Lorlando',
   projects: [
-    { id: 'yui', name: 'Yui', featured: true, repo: 'https://github.com/AT-Lorlando/yui', video: null, stack: ['Node/TS', 'Python', 'MCP', 'LLM local'] },
-    { id: 'hisho', name: 'Hisho', featured: false, repo: 'https://github.com/AT-Lorlando/hisho', video: null, stack: ['Nuxt', 'AdonisJS', 'PostgreSQL', 'LLM'] },
-    { id: 'koya', name: 'Koya', featured: false, repo: 'https://github.com/AT-Lorlando/koya', video: null, stack: ['Nuxt', 'AdonisJS', 'PostgreSQL', 'Nginx'] },
-    { id: 'yoji', name: 'Yoji', featured: false, repo: 'https://github.com/AT-Lorlando/yoji', video: null, stack: ['Nuxt', 'Capacitor', 'Obsidian', 'Git'] },
+    { id: 'aster', name: 'Aster', featured: true, repo: null, video: null, stack: ['AdonisJS', 'PostgreSQL', 'Nuxt', 'POSIX sh', 'CycloneDX'] },
+    { id: 'yui', name: 'Yui', featured: false, repo: 'https://github.com/AT-Lorlando/yui', video: null, stack: ['Node/TS', 'Python', 'MCP', 'LLM', 'Nuxt', 'Capacitor'] },
+    { id: 'koya', name: 'Koya', featured: false, repo: null, video: null, stack: ['Nuxt', 'AdonisJS', 'PostgreSQL', 'SSH', 'PM2', 'Nginx'] },
+    { id: 'yoji', name: 'Yoji', featured: false, repo: null, video: null, stack: ['Nuxt', 'AdonisJS', 'Git', 'MCP', 'Electron', 'Capacitor'] },
   ],
 }
 

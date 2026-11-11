@@ -5,8 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import { Checkbox } from '~/components/ui/checkbox'
 import { Label } from '~/components/ui/label'
+import { education, experiences, skillDomains } from '~/data/cv'
 
-const { t, tm, rt } = useI18n()
+const { t, te, tm, rt } = useI18n()
 
 const a4Mode = ref(false)                 // bascule l'aperçu écran en format A4 fixe
 const anonymous = ref(false)              // masque les informations personnelles
@@ -56,6 +57,11 @@ const about = computed(() => tm('cv.about') as MessageFunction<VueMessageType>[]
 const passions = computed(() => tm('cv.passions') as MessageFunction<VueMessageType>[])
 const paras = (key: string) => tm(`cv.experiences.${key}.paragraphs`) as MessageFunction<VueMessageType>[]
 const expBullets = (key: string) => tm(`cv.experiences.${key}.bullets`) as MessageFunction<VueMessageType>[]
+// CV anonymisé : l'intitulé sans le nom de la micro-entreprise (`titleAnonymous`)
+const expTitle = (key: string) =>
+  anonymous.value && te(`cv.experiences.${key}.titleAnonymous`)
+    ? `cv.experiences.${key}.titleAnonymous`
+    : `cv.experiences.${key}.title`
 
 /* Données structurelles (non traduites) ----------------------------------- */
 const contact = {
@@ -83,78 +89,6 @@ const projects: { label: string; fav?: boolean }[] = [
 ]
 
 
-const experiences = [
-  {
-    key: 'airbus', subtitle: true,
-    tags: [
-      { label: 'Python', color: '#3fb950' }, { label: 'Cyberwatch', color: '#39c5cf' },
-      { label: 'ELK', color: '#a371f7' }, { label: 'Ansible', color: '#db6d28' },
-      { label: 'Linux', color: '#f0623c' },
-    ],
-  },
-  {
-    key: 'viveris',
-    tags: [
-      { label: 'Vue.js/Nuxt', color: '#41b883' }, { label: 'Nest.js', color: '#4a9fd4' },
-      { label: 'Three.js', color: '#d4a72c' }, { label: 'PostgreSQL', color: '#e8833a' },
-    ],
-  },
-  {
-    key: 'altab', bullets: true,
-    tags: [
-      { label: 'JS/TS', color: '#3fb950' }, { label: 'Python', color: '#3fb950' },
-      { label: 'Vue.js/Nuxt', color: '#4a9fd4' }, { label: 'Adonis', color: '#d4a72c' },
-      { label: 'Three.js', color: '#d4a72c' },
-    ],
-  },
-]
-
-const education = [
-  { key: 'engineer', school: 'INSA Centre Val de Loire, Bourges' },
-  { key: 'entrepreneur', school: 'INSA Centre Val de Loire, Bourges' },
-]
-
-/* Compétences triées par domaine. `fav: true` met la pastille en avant.
-   Les libellés techniques (noms propres) restent en dur ; les soft-skills
-   traduisibles passent par `tKey` → t(`cv.softSkills.<tKey>`). */
-const skillDomains: { key: string; skills: { label?: string; tKey?: string; fav?: boolean }[] }[] = [
-  {
-    key: 'dev',
-    skills: [
-      { label: 'TS/JS', fav: true }, { label: 'Python', fav: true }, { label: 'Vue/Nuxt', fav: true },
-      { label: 'Adonis' , fav: true}, { label: 'PostgreSQL' }, { label: 'Html/CSS' }, { label: 'Tailwind' },
-      { label: 'ThreeJS' , fav: true}, { label: 'Capacitor' }, { label: 'Bash' }, { label: 'Llama.cpp' }, { label: 'Slidev' },
-      { label: 'vLLM' }, { label: 'MCP' },
-    ],
-  },
-  {
-    key: 'security',
-    skills: [
-      { label: 'Cyberwatch', fav: true }, { label: 'CISCAT' }, { label: 'Burp' },
-      { label: 'Exegol', fav: true }, { label: 'Wazuh' },
-    ],
-  },
-  {
-    key: 'infra',
-    skills: [
-      { label: 'Docker', fav: true }, { label: 'Ansible' }, { label: 'Git', fav: true },
-      { label: 'ELK' }, { label: 'Grafana' }, { label: 'Nginx' }, { label: 'Mikrotik' },
-    ],
-  },
-  {
-    key: 'systems',
-    skills: [
-      { label: 'Arch' , fav: true}, { label: 'Kali' }, { label: 'Suse' }, { label: 'Ubuntu' }, { label: 'Windows' },
-    ],
-  },
-  {
-    key: 'soft',
-    skills: [
-      { tKey: 'selftaught', fav: true }, { tKey: 'autonomous', fav: true }, { tKey: 'curious', fav: true },
-      { tKey: 'creative' }, { tKey: 'independent' }, { tKey: 'passionate' },
-    ],
-  },
-]
 </script>
 
 <template>
@@ -221,7 +155,8 @@ const skillDomains: { key: string; skills: { label?: string; tKey?: string; fav?
 
         <section>
           <h2 class="sec"><Icon name="github" />/projects</h2>
-          <div class="proj-grid">
+          <p v-if="anonymous" class="plain">{{ t('cv.projectsAnonymous') }}</p>
+          <div v-else class="proj-grid">
             <span v-for="(pr, i) in projects" :key="i" class="proj" :class="{ 'is-fav': pr.fav }">{{ pr.label }}</span>
           </div>
         </section>
@@ -237,7 +172,7 @@ const skillDomains: { key: string; skills: { label?: string; tKey?: string; fav?
               <div class="card-id">
                 <Icon name="monitor" class="card-ic" />
                 <div>
-                  <h3>{{ t(`cv.experiences.${xp.key}.title`) }}</h3>
+                  <h3>{{ t(expTitle(xp.key)) }}</h3>
                   <p v-if="xp.subtitle" class="sub">{{ t(`cv.experiences.${xp.key}.subtitle`) }}</p>
                 </div>
               </div>

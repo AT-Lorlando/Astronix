@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '~/components/ui/card'
+import type { MessageFunction, VueMessageType } from 'vue-i18n'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '~/components/ui/card'
 import { Badge } from '~/components/ui/badge'
-import { Button } from '~/components/ui/button'
+import ListItem from '~/components/ListItem.vue'
 import type { SiteProject } from '~/data/site'
 
-defineProps<{ project: SiteProject }>()
-const { t } = useI18n()
+const props = defineProps<{ project: SiteProject }>()
+const { t, tm, rt } = useI18n()
 
+const features = computed(() => tm(`projects.${props.project.id}.features`) as MessageFunction<VueMessageType>[])
 </script>
 
 <template>
   <Card
+    :id="`project-${project.id}`"
     :class="[
+      'scroll-mt-6',
       'group h-full transition-all duration-200 hover:-translate-y-1 hover:border-primary/50',
       project.featured ? 'border-primary/50' : '',
     ]"
@@ -21,25 +25,18 @@ const { t } = useI18n()
         <CardTitle>{{ project.name }}</CardTitle>
         <Badge v-if="project.featured" class="font-mono text-xs">{{ t('projects.featured') }}</Badge>
       </div>
-      <CardDescription class="line-clamp-2">{{ t(`projects.${project.id}.tagline`) }}</CardDescription>
+      <CardDescription>{{ t(`projects.${project.id}.tagline`) }}</CardDescription>
     </CardHeader>
     <CardContent class="flex flex-1 flex-col gap-4">
-      <p class="line-clamp-3 text-sm text-muted-foreground">{{ t(`projects.${project.id}.pitch`) }}</p>
+      <p class="text-sm text-muted-foreground">{{ t(`projects.${project.id}.pitch`) }}</p>
+      <ul class="space-y-1.5 text-sm">
+        <ListItem v-for="(f, i) in features" :key="i" :text="rt(f)" />
+      </ul>
       <div class="mt-auto flex flex-wrap gap-2">
         <Badge v-for="tech in project.stack" :key="tech" variant="secondary" class="font-mono text-xs">
           {{ tech }}
         </Badge>
       </div>
     </CardContent>
-    <CardFooter class="gap-3">
-      <Button size="sm" as-child>
-        <NuxtLink :to="`/projects/${project.id}`">{{ t('projects.viewProject') }}</NuxtLink>
-      </Button>
-      <Button size="sm" variant="ghost" as-child>
-        <a :href="project.repo" target="_blank" rel="noopener noreferrer">
-          <Icon name="lucide:github" class="mr-2 h-4 w-4" />{{ t('projects.viewGithub') }}
-        </a>
-      </Button>
-    </CardFooter>
   </Card>
 </template>

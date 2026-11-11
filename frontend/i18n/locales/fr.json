@@ -4,52 +4,78 @@
     "loading": "Chargement...",
     "email": "E-mail"
   },
-  "nav": { "about": "À propos", "projects": "Projets", "cv": "CV", "recommendations": "Recommandations", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}", "menu": "Menu" },
+  "nav": { "about": "À propos", "experience": "Expériences", "projects": "Projets", "cv": "CV", "recommendations": "Recommandations", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Changer de langue, actuellement {locale}", "menu": "Menu" },
   "hero": {
-    "positioning": "Ingénieur cyber et full-stack. Je conçois des produits pour me faciliter la vie, en local, sans cloud, avec de l'IA.",
-    "statusLine": "> Cherche l'alliance parfaite entre etre stimulé, utile, et valorisé",
+    "positioning": "Ingénieur cyber et dev full-stack. Je conçois mes propres outils pour me faciliter la vie, en local, sans cloud.",
+    "statusLine": "> Cherche l'alliance parfaite entre être stimulé, utile, et valorisé",
     "ctaProjects": "Voir les projets",
     "ctaContact": "Contact",
     "ctaGithub": "GitHub"
   },
+  "home": {
+    "about": { "title": "À propos" },
+    "experience": {
+      "details": {
+        "astronix": {
+          "title": "Ingénieur indépendant - Astronix (anciennement Altab)",
+          "paragraphs": [
+            "Astronix est née pendant mes études, sous le Statut National d'Étudiant-Entrepreneur : sites, plateformes et e-commerce fullstack pour mes premiers clients. C'est aujourd'hui mon activité à temps plein.",
+            "Je travaille en direct avec mes clients, dont Airbus Defence and Space, sur des missions d'ingénierie cyber, de développement fullstack, d'outillage et d'automatisation, et d'amélioration de process. Je pars d'un besoin parfois flou et je livre un outil qui tourne, de la conception au déploiement.",
+            "J'apporte un regard neuf de DevSecOps, orienté security-by-design, en collaboration avec les équipes et leurs architectes, pour éviter les mauvaises surprises."
+          ],
+          "link": "Mon projet phare : Aster"
+        },
+        "airbus": {
+          "paragraphs": [
+            "J'ai commencé par la gestion des vulnérabilités des segments sol européens (Egnos, Galileo, CO3D, PNEO…), soumis aux exigences de l'ESA. En repensant l'approche de zéro, j'ai rendu les calculs 1400 fois plus rapides et 175 % plus précis, avec de l'avance sur les demandes de l'ESA. J'en suis rapidement devenu le responsable technique.",
+            "J'ai ensuite conçu, seul, une solution d'audit de sécurité couvrant tout un SI : inventaire logiciel, gestion et priorisation des vulnérabilités, analyse de conformité, prévention de l'obsolescence, suivi dans le temps et un reporting devenu une référence en interne.",
+            "Enfin, je l'ai industrialisée en une plateforme web complète en microservices, en y ajoutant un outil interne couvrant les licences logicielles, avec un circuit de validation pour les spécialistes. Je l'ai portée de bout en bout : architecture, développement (Nuxt, AdonisJS, FastAPI, PostgreSQL), déploiement sur plusieurs réseaux cloisonnés. Accessible depuis tous les sites européens, elle sert des milliers d'utilisateurs et fait économiser plusieurs millions d'euros par an."
+          ]
+        },
+        "viveris": {
+          "paragraphs": [
+            "Hésitant entre poursuivre dans la voie de mon cursus en cybersécurité et développer mon activité d'auto-entrepreneur dans le dev web, j'ai choisi ce stage pour trancher.",
+            "J'y ai pris le lead d'une équipe de trois stagiaires pour concevoir et développer une application d'organisation du télétravail, avec une visualisation 3D des locaux. Du cahier des charges à la livraison, en agile. Ce stage a été la meilleure expérience pro possible, et m'a permis de gagner en confiance en mes capacités ; non seulement d'apprendre, mais surtout d'allier ingénierie, développement et cybersécurité."
+          ]
+        }
+      },
+      "title": "Expériences"
+    },
+    "skills": {
+      "title": "Compétences",
+      "languages": "Langues",
+      "legend": "Mes compétences principales"
+    },
+    "education": { "title": "Formation" }
+  },
   "projects": {
     "title": "Projets",
-    "back": "Retour aux projets",
-    "subtitle": "Des projets local-first, que je développe de A à Z.",
-    "viewProject": "Voir le projet",
-    "viewGithub": "Voir sur GitHub",
+    "subtitle": "Des projets perso que je conçois et développe de A à Z.",
     "featured": "Projet phare",
-    "architecture": "Architecture",
-    "features": "Fonctionnalités",
-    "notFound": "Projet introuvable",
-    "yui": {
-      "tagline": "Assistant vocal IA 100% local",
-      "pitch": "Assistant vocal IA qui pilote la maison, entièrement en local et sans cloud.",
-      "architecture": "La détection de wakeword alimente Whisper (STT) ; un agent LLM planifie les actions via une couche d'outils MCP modulaire ; XTTS gère la synthèse vocale. L'ensemble fonctionne en local.",
-      "features": ["Détection de wakeword + transcription Whisper", "Agent LLM local avec utilisation d'outils", "Architecture MCP modulaire pour piloter la maison", "Synthèse vocale XTTS, sans appel cloud"]
+    "aster": {
+      "tagline": "Analyse de chemins d'attaque, en environnement airgap",
+      "pitch": "Aster ne liste pas des CVE par machine : il compose des enchaînements d'attaque. « Un attaquant non authentifié atteint le front, y obtient une RCE, rebondit vers le back qui parle aux données clientes. » Toute la chaîne, du scan à la restitution, sans rien installer sur les machines scannées.",
+      "features": ["Collecte sans agent : SBOM CycloneDX 1.6 et constats de conformité, livrés en un seul bundle", "Matching CVE multi-sources (OSV, NVD, CVE List V5) avec comparateurs de versions maison", "Moteur de chemins : huit sortes de pas, trois positions d'attaquant, coupe minimale et bottlenecks", "Résultat daté qui dit aussi ce qu'il ignore"]
     },
-    "hisho": {
-      "tagline": "Portfolio professionnel augmenté par IA",
-      "pitch": "Portfolio technique augmenté par un LLM, qui transforme du texte libre en expériences, compétences et CV.",
-      "architecture": "Nuxt 4 en front, AdonisJS 6 et PostgreSQL en back (modèles Lucid). L'extraction passe par un endpoint compatible OpenAI en streaming SSE : le texte collé est transformé en JSON structuré (expériences, missions, compétences), réparé s'il est tronqué, puis importé de façon idempotente. La clé du modèle reste côté serveur.",
-      "features": ["Extraction LLM depuis du texte libre", "Données en PostgreSQL via Lucid", "Réponses du modèle en streaming SSE", "Génération de dossiers, mails et CV"]
+    "yui": {
+      "tagline": "Assistant domotique vocal, piloté par LLM",
+      "pitch": "Yui tourne 24h/24 et pilote l'appartement à la voix ou depuis son app : lumières, TV, musique, serrure, volets, minuteurs, arrosage. Le LLM ne sert qu'à router les intentions vers des outils, tout en ayant un contexte d'apprentissage, d'autonomie, de proactivité et même d'humour. Un ordre simple se joue en moins d'une demi-seconde.",
+      "features": ["Chaîne vocale : wake word, Whisper, XTTS, réponses lues au fil de l'eau", "Un serveur MCP par domaine (Hue, Nuki, Spotify, Chromecast, Somfy, Gmail…)", "Routage LLM entre un modèle local et le cloud selon la demande", "Scènes, automations et proactivité (réveil, départ, retour) avec app mobile"]
     },
     "koya": {
-      "tagline": "Panneau de contrôle du homelab",
-      "pitch": "Interface unique pour piloter le homelab : hosts, applications, déploiements et routes nginx.",
-      "architecture": "Nuxt 4, AdonisJS 6 et PostgreSQL. Les hosts et applications sont enregistrés en base ; l'outil lit les configs nginx pour en déduire les zones existantes et construit les routes (proxy ou redirection) vers un host et un port connus, en distinguant les domaines locaux (.home.arpa, certificat mkcert) des domaines exposés via Cloudflare.",
-      "features": ["Inventaire des hosts et applications", "Gestion des routes nginx (proxy, redirections)", "Zones locales (.home.arpa) ou exposées via Cloudflare", "Suivi des déploiements"]
+      "tagline": "Déploiement et supervision du homelab",
+      "pitch": "Koya unifie toutes les configurations de mon homelab au même endroit : des routes nginx du reverse proxy sur un Pi au déploiement d'un process Node sur le serveur de déploiement, en passant par le monitoring des apps, des services et même du routeur, avec mon propre système de push-to-build/deploy. Un gain de temps et de légèreté significatif.",
+      "features": ["Pipeline de déploiement avec historique et sortie de chaque étape", "Push-to-deploy par webhook GitHub signé", "Gestion des hosts et des clés SSH", "Routes nginx lues et écrites depuis l'interface"]
     },
     "yoji": {
-      "tagline": "Todos local-first par-dessus Obsidian",
-      "pitch": "Todos par-dessus Obsidian, en local et synchronisés via Git. Vos données restent les vôtres.",
-      "architecture": "Application Nuxt empaquetée en mobile via Capacitor. Les tâches sont des cases à cocher Markdown, lues et écrites directement dans le coffre Obsidian ; pas de base de données, le coffre est la seule source de vérité. La synchronisation entre appareils passe par Git, sans serveur central.",
-      "features": ["Open-source et 100% local", "Synchro par Git, sans serveur", "S'appuie sur votre coffre Obsidian"]
+      "tagline": "Hub de notes, tâches et projets, + MCP",
+      "pitch": "Yoji remplace Obsidian et Linear : j'y mets mes notes, mes tâches et le suivi de mes projets, dans un vault Markdown versionné par Git. Claude y lit et y écrit via MCP, si bien qu'aucune session de travail ne repart de zéro.",
+      "features": ["Vault Git comme source de vérité, base de données comme simple index", "Synchronisation avec gestion des conflits et sauvegardes", "Une quarantaine d'outils MCP", "Web, Linux (Electron, y compris hors ligne) et Android"]
     }
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Un projet, une question ? Écrivez-moi.",
+    "subtitle": "Un projet, une question ?",
     "name": "Nom",
     "email": "Email",
     "message": "Message",
@@ -66,7 +92,6 @@
   },
   "recommendations": {
     "title": "Recommandations",
-    "subtitle": "Ce que des collègues et collaborateurs disent de mon travail.",
     "empty": "Aucune recommandation pour le moment. Soyez le premier !",
     "loadError": "Impossible de charger les recommandations.",
     "readLetter": "Lire la lettre",
@@ -92,6 +117,7 @@
     "a4Preview": "Aperçu A4",
     "anonymize": "Anonymiser",
     "anonymousName": "Candidat",
+    "projectsAnonymous": "N'hésitez pas à me questionner sur tous mes projets locaux persos.",
     "about": [
       "Passionné par la science et éternel autodidacte, j'ai suivi un cursus d'ingénieur en cybersécurité tout en créant une micro-entreprise de développement web en parallèle.",
       "Aujourd'hui, j'allie une posture DevSecOps au travail à une veille technique active via la maintenance de mon Homelab. Ce triptyque (Code, Sécurité, Hardware) me permet de développer une vision holistique des systèmes informatiques modernes, et surtout assouvir ma soif d'apprendre et de construire.",
@@ -106,7 +132,7 @@
       "airbus": {
         "title": "Ingénieur cyber / Tech Lead - MCS Airbus Defence and Space",
         "subtitle": "On behalf of Neverhack",
-        "date": "août 2023 - aujourd'hui",
+        "date": "août 2023 - sept. 2026",
         "paragraphs": [
           "Grâce à une approche innovante, j'ai permis d'optimiser et d'améliorer significativement de nombreux processus. x1400 en vitesse de calcul, +175% de précision, tout en étant en avance sur les demandes de l'ESA. J'ai ainsi rapidement gagné en responsabilités jusqu'à devenir responsable technique, le tout sur des projets très intéressants comme le développement d'outil de gestion de vulnérabilités sur des systèmes segments sol Européens (Egnos, Galiléo, CO3D, PNEO...) pour répondre aux exigences de l'ESA.",
           "Par la suite, j'ai conçu une solution d'audit de sécurité global couvrant l'ensemble d'un SI. Cet outil intègre la gestion et la priorisation des vulnérabilités, la prévention de l'obsolescence et une analyse temporelle, garantissant une évolution sécurisée du système via un reporting apprécié par Airbus.",
@@ -120,19 +146,15 @@
           "J'ai pris le lead d'une équipe de trois stagiaires développeurs Web pour la conception et le développement d'une application permettant d'organiser le télétravail dans l'entreprise, avec une visualisation en 3D. Ce projet a été réalisé de bout en bout (du cahier des charges à la livraison) en méthode agile, offrant dans sa globalité la meilleure première expérience professionnelle possible."
         ]
       },
-      "altab": {
-        "title": "Auto entrepreneur - Altab",
-        "date": "Depuis août 2020",
+      "astronix": {
+        "title": "Ingénieur indépendant - Astronix",
+        "titleAnonymous": "Ingénieur indépendant - Micro-entreprise",
+        "date": "Depuis oct. 2026",
         "paragraphs": [
-          "Durant mes études, j'ai pu construire une micro-entreprise dans le cadre du Statut National des Etudiants Entrepreneurs. J'ai pu en profiter pour monter de nombreux projets :"
+          "Créée pendant mes études, ma micro-entreprise est aujourd'hui mon activité à temps plein. Je travaille en direct avec mes clients, dont Airbus Defence and Space, sur des missions d'ingénierie cyber, de développement fullstack, d'outillage et d'amélioration de process, avec un regard orienté security-by-design."
         ],
         "bullets": [
-          "Développement Fullstack + 3D du site de ma micro-entreprise",
-          "Frontend + 3D pour un projet communautaire de type PixelWar (>100k utilisateurs)",
-          "Plateforme Fullstack hébergeant >60 Go de photos avec rendu via lazy-loading",
-          "E-commerce Fullstack pour un client vendant des batteries lithium pour bateaux",
-          "Algorithme de vertex cover avec visualisation",
-          "Projet domotique (type Jarvis) avec LLM intégré pour contrôler une maison"
+          "Aster, mon projet phare : analyse de chemins d'attaque en environnement airgap (SBOM sans agent, matching CVE multi-sources, moteur de chemins d'attaque)"
         ]
       }
     },
@@ -156,6 +178,6 @@
       "passionate": "Passionné"
     }
   },
-  "about": { "title": "À propos" },
-  "footer": { "madeWith": "Made with Nuxt & Three.js", "email": "Email", "github": "GitHub" }
+  "footer": { "madeWith": "Made with Nuxt, Three.js, Adonis.js, and love.", "email": "Email", "github": "GitHub" },
+  "intro": { "skip": "Passer l'intro" }
 }

@@ -77,6 +77,10 @@ export default defineNuxtConfig({
   // Note: only applies to the node-server (web) build, not the static mobile build.
   routeRules: {
     '/api/v1/**': { proxy: `${env.parsed?.API_URL}/**` },
+    // anciennes pages, devenues des sections de l'accueil
+    '/about': { redirect: '/#about' },
+    '/projects': { redirect: '/#projects' },
+    '/projects/**': { redirect: '/#projects' },
   },
 
   vite: {

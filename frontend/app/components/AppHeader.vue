@@ -7,15 +7,18 @@ const { t } = useI18n()
 const route = useRoute()
 const open = ref(false)
 
+// Les sections de l'accueil sont des ancres ; CV, recommandations et contact restent des pages.
 const links = [
-  { to: '/about', label: 'nav.about' },
-  { to: '/projects', label: 'nav.projects' },
   { to: '/cv', label: 'nav.cv' },
   { to: '/recommendations', label: 'nav.recommendations' },
   { to: '/contact', label: 'nav.contact' },
 ]
 
-const isActive = (to: string) => route.path === to || route.path.startsWith(`${to}/`)
+const isActive = (to: string) => {
+  const hash = to.split('#')[1]
+  if (hash !== undefined) return route.path === '/' && route.hash === `#${hash}`
+  return route.path === to || route.path.startsWith(`${to}/`)
+}
 
 // Ferme le panneau mobile après navigation.
 watch(() => route.path, () => { open.value = false })

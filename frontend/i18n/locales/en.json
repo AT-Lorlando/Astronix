@@ -4,52 +4,78 @@
     "loading": "Loading...",
     "email": "Email"
   },
-  "nav": { "about": "About", "projects": "Projects", "cv": "CV", "recommendations": "Recommendations", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}", "menu": "Menu" },
+  "nav": { "about": "About", "experience": "Experience", "projects": "Projects", "cv": "CV", "recommendations": "Recommendations", "contact": "Contact", "github": "GitHub", "toggleLanguage": "Switch language, current {locale}", "menu": "Menu" },
   "hero": {
-    "positioning": "Cyber and full-stack engineer. I build products to make my life easier, that run locally, without the cloud, and with AI.",
-    "statusLine": "> Seeking the perfect balance between being stimulated, usefull, and valued",
+    "positioning": "Cyber engineer and full-stack dev. I build my own tools to make my life easier, locally, without the cloud.",
+    "statusLine": "> Seeking the perfect balance between being stimulated, useful, and valued",
     "ctaProjects": "View projects",
     "ctaContact": "Contact",
     "ctaGithub": "GitHub"
   },
+  "home": {
+    "about": { "title": "About" },
+    "experience": {
+      "details": {
+        "astronix": {
+          "title": "Independent engineer - Astronix (formerly Altab)",
+          "paragraphs": [
+            "Astronix started during my studies, under France's National Student-Entrepreneur Status: full-stack websites, platforms and e-commerce for my first clients. Today it's my full-time activity.",
+            "I work directly with my clients, including Airbus Defence and Space, on cyber engineering, full-stack development, tooling and automation, and process-improvement missions. I start from a need that is sometimes fuzzy and deliver a tool that runs, from design to deployment.",
+            "I bring a fresh DevSecOps perspective, security-by-design oriented, working with teams and their architects to avoid nasty surprises."
+          ],
+          "link": "My lead project: Aster"
+        },
+        "airbus": {
+          "paragraphs": [
+            "I started with vulnerability management for European ground segments (Egnos, Galileo, CO3D, PNEO…), bound by ESA's requirements. By rethinking the approach from scratch, I made the computations 1,400 times faster and 175% more accurate, ahead of ESA's requests. I quickly became the technical lead.",
+            "I then designed, on my own, a security audit solution covering an entire information system: software inventory, vulnerability management and prioritization, compliance analysis, obsolescence prevention, tracking over time, and reporting that became an internal reference.",
+            "Finally, I industrialized it into a full microservices web platform, adding an internal tool for software licenses with a validation workflow for specialists. I carried it end to end: architecture, development (Nuxt, AdonisJS, FastAPI, PostgreSQL), deployment across several segregated networks. Available from every European site, it serves thousands of users and saves several million euros a year."
+          ]
+        },
+        "viveris": {
+          "paragraphs": [
+            "Torn between continuing down the cybersecurity path of my degree and growing my freelance web-development business, I chose this internship to decide.",
+            "I led a team of three interns to design and build an app for organizing remote work, with a 3D view of the offices. From specification to delivery, using agile methods. This internship was the best professional experience I could have had, and it gave me confidence in my abilities: not only to learn, but above all to bring engineering, development and cybersecurity together."
+          ]
+        }
+      },
+      "title": "Experience"
+    },
+    "skills": {
+      "title": "Skills",
+      "languages": "Languages",
+      "legend": "My core skills"
+    },
+    "education": { "title": "Education" }
+  },
   "projects": {
     "title": "Projects",
-    "back": "Back to projects",
-    "subtitle": "Local-first projects, built from end to end.",
-    "viewProject": "View project",
-    "viewGithub": "View on GitHub",
+    "subtitle": "Personal projects I design and build end to end.",
     "featured": "Lead project",
-    "architecture": "Architecture",
-    "features": "Features",
-    "notFound": "Project not found",
-    "yui": {
-      "tagline": "100% local AI voice assistant",
-      "pitch": "AI voice assistant that runs the home, fully local and cloud-free.",
-      "architecture": "Wakeword detection feeds Whisper (STT); an LLM agent plans actions over a modular MCP tool layer; XTTS handles speech synthesis. The whole pipeline runs locally.",
-      "features": ["Wakeword detection + Whisper speech-to-text", "Local LLM agent with tool use", "Modular MCP architecture for home control", "XTTS voice synthesis, no cloud calls"]
+    "aster": {
+      "tagline": "Attack-path analysis for air-gapped environments",
+      "pitch": "Aster doesn't list CVEs per machine: it composes attack chains. \"An unauthenticated attacker reaches the front end, gets RCE there, pivots to the back end that talks to customer data.\" The whole chain, from scan to report, without installing anything on the scanned machines.",
+      "features": ["Agentless collection: CycloneDX 1.6 SBOMs and compliance findings, shipped as one bundle", "Multi-source CVE matching (OSV, NVD, CVE List V5) with in-house version comparators", "Path engine: eight kinds of steps, three attacker positions, minimal cut and bottlenecks", "Dated results that also state what they don't know"]
     },
-    "hisho": {
-      "tagline": "AI-augmented professional portfolio",
-      "pitch": "A technical portfolio augmented by an LLM, turning free-form text into experiences, skills and CVs.",
-      "architecture": "Nuxt 4 on the front, AdonisJS 6 and PostgreSQL on the back (Lucid models). Extraction runs through an OpenAI-compatible endpoint over SSE streaming: pasted text is turned into structured JSON (experiences, missions, skills), repaired if truncated, then imported idempotently. The model key stays server-side.",
-      "features": ["LLM extraction from free-form text", "Data in PostgreSQL via Lucid", "Model responses over SSE streaming", "Generates dossiers, emails and CVs"]
+    "yui": {
+      "tagline": "LLM-driven voice home assistant",
+      "pitch": "Yui runs around the clock and controls the apartment by voice or from its app: lights, TV, music, lock, shutters, timers, watering. The LLM only routes intents to tools, while keeping a context of learning, autonomy, proactivity and even humor. A simple command plays out in under half a second.",
+      "features": ["Voice pipeline: wake word, Whisper, XTTS, replies spoken as they stream", "One MCP server per domain (Hue, Nuki, Spotify, Chromecast, Somfy, Gmail…)", "LLM routing between a local model and the cloud depending on the request", "Scenes, automations and proactivity (wake-up, leaving, coming home) with a mobile app"]
     },
     "koya": {
-      "tagline": "Homelab control panel",
-      "pitch": "A single interface to run the homelab: hosts, applications, deployments and nginx routes.",
-      "architecture": "Nuxt 4, AdonisJS 6 and PostgreSQL. Hosts and applications are stored in the database; the tool reads the nginx configs to infer existing zones and builds routes (proxy or redirect) toward a known host and port, telling apart local domains (.home.arpa, mkcert cert) from domains exposed through Cloudflare.",
-      "features": ["Inventory of hosts and applications", "Nginx route management (proxy, redirects)", "Local (.home.arpa) or Cloudflare-exposed zones", "Deployment tracking"]
+      "tagline": "Homelab deployment and monitoring",
+      "pitch": "Koya brings every configuration of my homelab into one place: from the nginx routes of the reverse proxy on a Pi to deploying a Node process on the deployment server, through monitoring of apps, services and even the router, with my own push-to-build/deploy system. A significant gain in time and lightness.",
+      "features": ["Deployment pipeline with history and per-step output", "Push-to-deploy through a signed GitHub webhook", "Host and SSH key management", "Nginx routes read and written from the UI"]
     },
     "yoji": {
-      "tagline": "Local-first todos on top of Obsidian",
-      "pitch": "Local-first todos on top of Obsidian, synced over Git. Your data stays yours.",
-      "architecture": "A Nuxt app packaged for mobile with Capacitor. Tasks are Markdown checkboxes, read and written directly in the Obsidian vault; there's no database — the vault is the single source of truth. Syncing between devices goes through Git, with no central server.",
-      "features": ["Open-source and fully local", "Git-based sync, no server", "Lives on top of your Obsidian vault"]
+      "tagline": "Notes, tasks and projects hub, + MCP",
+      "pitch": "Yoji replaces Obsidian and Linear: I keep my notes, tasks and project tracking in a Git-versioned Markdown vault. Claude reads and writes it over MCP, so no work session starts from scratch.",
+      "features": ["Git vault as the source of truth, database as a mere index", "Sync with conflict handling and backups", "About forty MCP tools", "Web, Linux (Electron, offline included) and Android"]
     }
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "A project, a question? Drop me a line.",
+    "subtitle": "A project, a question?",
     "name": "Name",
     "email": "Email",
     "message": "Message",
@@ -66,7 +92,6 @@
   },
   "recommendations": {
     "title": "Recommendations",
-    "subtitle": "What colleagues and collaborators say about my work.",
     "empty": "No recommendations yet. Be the first!",
     "loadError": "Could not load recommendations.",
     "readLetter": "Read the letter",
@@ -92,6 +117,7 @@
     "a4Preview": "A4 preview",
     "anonymize": "Anonymize",
     "anonymousName": "Candidate",
+    "projectsAnonymous": "Feel free to ask me about any of my local personal projects.",
     "about": [
       "Passionate about science and a lifelong self-learner, I completed a cybersecurity engineering degree while running a web-development micro-business on the side.",
       "Today I pair a DevSecOps mindset at work with active technical curiosity through maintaining my Homelab. This triptych (Code, Security, Hardware) gives me a holistic view of modern IT systems — and above all feeds my thirst to learn and build.",
@@ -106,7 +132,7 @@
       "airbus": {
         "title": "Cyber Engineer / Tech Lead - MCS Airbus Defence and Space",
         "subtitle": "On behalf of Neverhack",
-        "date": "Aug 2023 - present",
+        "date": "Aug 2023 - Sep 2026",
         "paragraphs": [
           "Through an innovative approach, I significantly optimized and improved many processes — x1400 in compute speed, +175% in accuracy, all while staying ahead of ESA's requirements. I quickly gained responsibility up to becoming technical lead, on fascinating projects such as building a vulnerability-management tool for European ground-segment systems (Egnos, Galileo, CO3D, PNEO...) to meet ESA's requirements.",
           "I then designed a global security-audit solution covering an entire information system. The tool integrates vulnerability management and prioritization, obsolescence prevention and temporal analysis, ensuring a secure evolution of the system through reporting praised by Airbus.",
@@ -120,19 +146,15 @@
           "I led a team of three junior web developers to design and build an application for organizing remote work across the company, with 3D visualization. The project was delivered end to end (from specification to release) using agile methods, making for the best possible first professional experience overall."
         ]
       },
-      "altab": {
-        "title": "Self-employed - Altab",
-        "date": "Since Aug 2020",
+      "astronix": {
+        "title": "Independent engineer - Astronix",
+        "titleAnonymous": "Independent engineer - Micro-business",
+        "date": "Since Oct 2026",
         "paragraphs": [
-          "During my studies, I built a micro-business under France's National Student-Entrepreneur Status. It let me launch many projects:"
+          "Started during my studies, my micro-business is now my full-time activity. I work directly with my clients, including Airbus Defence and Space, on cyber engineering, full-stack development, tooling and process-improvement missions, with a security-by-design mindset."
         ],
         "bullets": [
-          "Full-stack + 3D development of my micro-business website",
-          "Frontend + 3D for a PixelWar-style community project (>100k users)",
-          "Full-stack platform hosting >60 GB of photos with lazy-loaded rendering",
-          "Full-stack e-commerce for a client selling lithium boat batteries",
-          "Vertex-cover algorithm with visualization",
-          "Home-automation project (Jarvis-style) with an embedded LLM to control a house"
+          "Aster, my lead project: attack-path analysis for air-gapped environments (agentless SBOMs, multi-source CVE matching, attack-path engine)"
         ]
       }
     },
@@ -156,6 +178,6 @@
       "passionate": "Passionate"
     }
   },
-  "about": { "title": "About" },
-  "footer": { "madeWith": "Made with Nuxt & Three.js", "email": "Email", "github": "GitHub" }
+  "footer": { "madeWith": "Made with Nuxt, Three.js, Adonis.js, and love.", "email": "Email", "github": "GitHub" },
+  "intro": { "skip": "Skip intro" }
 }

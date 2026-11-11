@@ -14,7 +14,7 @@ const { t } = useI18n()
     </p>
     <div class="flex flex-wrap gap-3">
       <Button as-child>
-        <NuxtLink to="/projects">{{ t('hero.ctaProjects') }}</NuxtLink>
+        <NuxtLink to="/#projects">{{ t('hero.ctaProjects') }}</NuxtLink>
       </Button>
       <Button variant="secondary" as-child>
         <NuxtLink to="/contact">{{ t('hero.ctaContact') }}</NuxtLink>

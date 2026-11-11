@@ -66,7 +66,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <PageSection width="list">
-    <PageHeader :title="t('recommendations.title')" :subtitle="t('recommendations.subtitle')" />
+    <PageHeader :title="t('recommendations.title')" />
 
     <!-- Liste des recommandations approuvées -->
     <p v-if="loadError" class="mb-6 rounded-md bg-destructive/10 p-3 text-sm text-destructive" role="alert">
@@ -105,7 +105,7 @@ const onSubmit = handleSubmit(async (values) => {
           <DialogTitle class="font-mono text-base">— {{ openLetter?.name }}</DialogTitle>
           <DialogDescription>{{ openLetter ? formatDate(openLetter.createdAt) : '' }}</DialogDescription>
         </DialogHeader>
-        <div class="-mr-2 max-h-[65vh] overflow-y-auto pr-2">
+        <div class="-mr-2 max-h-[65vh] overflow-y-auto pr-2" data-lenis-prevent>
           <p class="whitespace-pre-wrap leading-relaxed">{{ openLetter?.content }}</p>
         </div>
       </DialogContent>

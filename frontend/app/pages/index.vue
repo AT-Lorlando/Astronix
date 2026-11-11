@@ -7,15 +7,16 @@ const { t } = useI18n()
 <template>
   <div>
     <HeroSection />
+    <AboutSection />
+    <ExperienceSection />
 
-    <PageSection width="list" as="section" class="!pt-0">
-      <h2 class="mb-2 font-mono text-sm uppercase tracking-widest text-muted-foreground">
-        {{ t('projects.title') }}
-      </h2>
-      <p class="mb-8 text-muted-foreground">{{ t('projects.subtitle') }}</p>
-      <div class="grid gap-6 sm:grid-cols-2">
+    <HomeSection id="projects" :title="t('projects.title')" :subtitle="t('projects.subtitle')">
+      <div class="grid gap-6 sm:grid-cols-2" data-build-clone="ProjectCard">
         <ProjectCard v-for="project in site.projects" :key="project.id" :project="project" />
       </div>
-    </PageSection>
+    </HomeSection>
+
+    <SkillsSection />
+    <EducationSection />
   </div>
 </template>
