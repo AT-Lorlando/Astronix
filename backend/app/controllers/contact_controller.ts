@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import ContactMessage from '#models/contact_message'
 import { contactValidator } from '#validators/contact_validator'
 import { contactRateLimiter } from '#services/rate_limiter'
+import { notifyOwner } from '#services/owner_notifier'
 
 export default class ContactController {
   async store({ request, response }: HttpContext) {
@@ -18,6 +19,11 @@ export default class ContactController {
     }
 
     await ContactMessage.create({ name, email, message, ipAddress: request.ip() ?? null })
+    notifyOwner({
+      title: `Message de ${name}`,
+      text: `${name} <${email}>\n\n${message}`,
+      replyTo: email,
+    })
 
     return response.ok({ ok: true })
   }

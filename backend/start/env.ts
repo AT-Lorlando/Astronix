@@ -52,4 +52,28 @@ export default await Env.create(new URL('../', import.meta.url), {
   */
   ADMIN_EMAIL: Env.schema.string.optional(),
   ADMIN_PASSWORD: Env.schema.string.optional(),
+
+  /*
+  |----------------------------------------------------------
+  | Push notifications through Yui (optional). When both are set,
+  | a new contact message or recommendation pings the owner's phone
+  | via Yui's `POST /notify` (Bearer = Yui's BEARER_TOKEN).
+  |----------------------------------------------------------
+  */
+  YUI_URL: Env.schema.string.optional({ format: 'url', tld: false }),
+  YUI_BEARER: Env.schema.string.optional(),
+
+  /*
+  |----------------------------------------------------------
+  | Same notifications by e-mail (optional): the owner's mailbox
+  | sends to itself (MAIL_TO defaults to SMTP_USER). Port 465 =
+  | implicit TLS, 587 = STARTTLS (SMTP_SECURE overrides the guess).
+  |----------------------------------------------------------
+  */
+  SMTP_HOST: Env.schema.string.optional({ format: 'host' }),
+  SMTP_PORT: Env.schema.number.optional(),
+  SMTP_SECURE: Env.schema.boolean.optional(),
+  SMTP_USER: Env.schema.string.optional(),
+  SMTP_PASSWORD: Env.schema.string.optional(),
+  MAIL_TO: Env.schema.string.optional(),
 })

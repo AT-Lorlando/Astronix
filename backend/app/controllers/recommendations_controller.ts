@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Recommendation from '#models/recommendation'
 import { recommendationValidator } from '#validators/recommendation_validator'
 import { recommendationRateLimiter } from '#services/rate_limiter'
+import { notifyOwner } from '#services/owner_notifier'
 
 export default class RecommendationsController {
   /**
@@ -47,6 +48,7 @@ export default class RecommendationsController {
       approved: false,
       ipAddress: request.ip() ?? null,
     })
+    notifyOwner({ title: 'Recommandation à valider', text: `${name}\n\n${content}` })
 
     return response.ok({ ok: true })
   }
