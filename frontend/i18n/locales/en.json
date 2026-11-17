@@ -151,10 +151,9 @@
         "titleAnonymous": "Independent engineer - Micro-business",
         "date": "Since Oct 2026",
         "paragraphs": [
-          "Started during my studies, my micro-business is now my full-time activity. I work directly with my clients, including Airbus Defence and Space, on cyber engineering, full-stack development, tooling and process-improvement missions, with a security-by-design mindset."
+          "Started during my studies, my micro-business is now my full-time activity. I work directly with my clients, including Airbus Defence and Space, on cyber engineering, full-stack development, tooling and process-improvement missions, with a security-by-design mindset. The freelancing allosw me to develop my lead project, Aster : an attack-path analysis motor for air-gapped environments (agentless SBOMs, multi-source CVE matching, attack-path engine)"
         ],
         "bullets": [
-          "Aster, my lead project: attack-path analysis for air-gapped environments (agentless SBOMs, multi-source CVE matching, attack-path engine)"
         ]
       }
     },

@@ -54,7 +54,7 @@
     "featured": "Projet phare",
     "aster": {
       "tagline": "Analyse de chemins d'attaque, en environnement airgap",
-      "pitch": "Ce n'est pas un simple matcher de CVE, mais un moteur qui compose des enchaînements d'attaque. « Un attaquant non authentifié atteint le front, y obtient une RCE, rebondit vers le back qui parle aux données clientes. » Toute la chaîne, du scan à la restitution, sans rien installer sur les machines scannées.",
+      "pitch": "Ce n'est pas qu'un simple matcher de CVE, mais surtout un moteur qui calcul des 'chemins d'attaques'. « Un attaquant non authentifié atteint le front, y obtient une RCE, rebondit vers le back qui parle aux données clientes. » Toute la chaîne, du scan à l'output, sans rien installer sur les machines scannées.",
       "features": ["Collecte sans agent : SBOM CycloneDX 1.6 et constats de conformité, livrés en un seul bundle", "Matching CVE multi-sources (OSV, NVD, CVE List V5) avec comparateurs de versions maison", "Moteur de chemins : huit sortes de pas, trois positions d'attaquant, coupe minimale et bottlenecks", "Résultat daté qui dit aussi ce qu'il ignore"]
     },
     "yui": {
@@ -151,10 +151,9 @@
         "titleAnonymous": "Ingénieur indépendant - Micro-entreprise",
         "date": "Depuis oct. 2026",
         "paragraphs": [
-          "Créée pendant mes études, ma micro-entreprise est aujourd'hui mon activité à temps plein. Je travaille en direct avec mes clients, dont Airbus Defence and Space, sur des missions d'ingénierie cyber, de développement fullstack, d'outillage et d'amélioration de process, avec un regard orienté security-by-design."
+          "Créée pendant mes études, ma micro-entreprise est aujourd'hui mon activité à temps plein. Je travaille en direct avec mes clients, dont Airbus Defence and Space, sur des missions d'ingénierie cyber, de développement fullstack, d'outillage et d'amélioration de process, avec un regard orienté security-by-design. Le freelane me permet également de devélopper mon projet phare, Aster : un moteur d'analyse de chemins d'attaque en environnement airgap (SBOM sans agent, matching CVE multi-sources, moteur de chemins d'attaque, etc)"
         ],
         "bullets": [
-          "Aster, mon projet phare : analyse de chemins d'attaque en environnement airgap (SBOM sans agent, matching CVE multi-sources, moteur de chemins d'attaque)"
         ]
       }
     },
