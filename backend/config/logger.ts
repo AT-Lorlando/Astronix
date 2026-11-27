@@ -13,7 +13,21 @@ const loggerConfig = defineConfig({
     app: {
       enabled: true,
       name: env.get('APP_NAME'),
-      level: env.get('LOG_LEVEL'),
+      level: env.get('LOG_LEVEL', 'info'),
+      // fields added to every line (see the homelab logs convention)
+      base: { app: 'astronix', service: 'backend', env: app.inProduction ? 'prod' : 'dev' },
+      redact: {
+        paths: [
+          'password',
+          '*.password',
+          'token',
+          '*.token',
+          'authorization',
+          '*.authorization',
+          'headers.cookie',
+        ],
+        censor: '[redacted]',
+      },
       transport: {
         targets: targets()
           .pushIf(!app.inProduction, targets.pretty())

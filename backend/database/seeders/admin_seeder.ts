@@ -13,11 +13,14 @@ export default class extends BaseSeeder {
     const password = env.get('ADMIN_PASSWORD')
 
     if (!email || !password) {
-      logger.warn('Skipping admin seeder: set ADMIN_EMAIL and ADMIN_PASSWORD to create the admin.')
+      logger.warn(
+        { event: 'seed.admin_skipped' },
+        'admin seeder skipped: ADMIN_EMAIL or ADMIN_PASSWORD missing'
+      )
       return
     }
 
     await User.updateOrCreate({ email }, { email, password, fullName: 'Admin' })
-    logger.info({ email }, 'Admin account ready')
+    logger.info({ event: 'seed.admin_ready' }, 'admin account ready')
   }
 }
