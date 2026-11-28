@@ -18,8 +18,12 @@ export interface OwnerNotice {
 }
 
 export function notifyOwner(notice: OwnerNotice): void {
-  pushViaYui(notice).catch((error) => logger.warn({ err: error }, 'yui notify failed'))
-  sendMail(notice).catch((error) => logger.warn({ err: error }, 'owner mail failed'))
+  pushViaYui(notice).catch((error) =>
+    logger.warn({ event: 'notify.yui_failed', err: error }, 'yui notify failed')
+  )
+  sendMail(notice).catch((error) =>
+    logger.warn({ event: 'notify.mail_failed', err: error }, 'owner mail failed')
+  )
 }
 
 /* Push via Yui */
@@ -40,7 +44,8 @@ async function pushViaYui({ title, text }: OwnerNotice) {
     }),
     signal: AbortSignal.timeout(5000),
   })
-  if (!res.ok) logger.warn({ status: res.status }, 'yui notify rejected')
+  if (!res.ok)
+    logger.warn({ event: 'notify.yui_rejected', status: res.status }, 'yui notify rejected')
 }
 
 /* E-mail to self */
